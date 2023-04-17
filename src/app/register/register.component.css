@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+.register-page-center {
+	background-color: rgb(114, 7, 185);
+	position: absolute;
+	min-width: 300px;
+	min-height: 300px;
+	width: 40%;
+	padding: 10px;
+	align-content: center;
+	top: 50%;
+	left: 50%;
+
+	transform: translate(-50%, -50%);
+
+}

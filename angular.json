@@ -79,7 +79,7 @@
           "options": {
             "polyfills": [
               "zone.js",
-              "zone.js/testing"
+              "zone.js/register"
             ],
             "tsConfig": "tsconfig.spec.json",
             "assets": [
