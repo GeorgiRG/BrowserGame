@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
 import { Location } from '@angular/common';
-import { userCredentials } from 'src/shared/classes/userCredentials';
+import { User } from 'src/shared/models/User';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 
 import { HttpClient, HttpClientModule, HttpErrorResponse } from '@angular/common/http';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  selector: 'app-registration',
+  templateUrl: './registration.component.html',
+  styleUrls: ['./registration.component.css']
 })
-export class RegisterComponent {
+export class RegistrationComponentnent {
 
   constructor(
     private location: Location,
@@ -21,13 +21,13 @@ export class RegisterComponent {
     this.location.back();
   }
 
-  model = new userCredentials('234234', 'Dr. IQ', '12311');
+  model = new User('234234', 'Dr. IQ', '12311');
 
   submitted = false;
   onOther() { this.submitted = false }
   onSubmit() {
     console.log(this.model)
-    this.http.post<userCredentials>("https://localhost:7017/users", this.model)
+    this.http.post<User>("https://localhost:7017/users", this.model)
     .subscribe((res) => {
       console.log(res, "maybe works?")
     });
@@ -37,7 +37,7 @@ export class RegisterComponent {
   }
 
   newUser() {
-    this.model = new userCredentials('asdf', '', '');
+    this.model = new User('asdf', '', '');
   }
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
-	<div class="register-page-center">
-	<h1>Register</h1>
+	<div class="registration-page-center">
+	<h1>Registration</h1>
 		<form #heroForm="ngForm" (ngSubmit)="onSubmit()">
 			<div class="form-group">
 				<label for="name">Name</label>
@@ -30,6 +30,6 @@
 				(click)="newUser(); heroForm.reset()">New Hero</button>
 		</form>
 			<button class="log-in-button" (click)="goBack()">Go back</button>
-			<button class="register-button" type="submit" >Register</button>
+			<button class="registration-button" type="submit" >Registration</button>
 	</div>
 </html>
