@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+	<div  class="content" id="content">
+		<div id="factions">
+			<div (mouseleave)="hideDetails(expanded1)"
+				(mouseenter)="showDetails(expanded1, 'green')" class="faction"
+				style="background-color: var(--green);">f 
+			</div>
+			<div (mouseleave)="hideDetails(expanded2)"
+				(mouseenter)="showDetails(expanded2, 'red')" class="faction"
+				style="background-color:  var(--red);">f
+			</div>
+			<div (mouseleave)="hideDetails(expanded3)"
+				(mouseenter)="showDetails(expanded3, 'blue')" class="faction"
+				style="background-color: var(--blue);">f
+			</div>
+		</div>
+		<div #expanded1 class="faction-expanded" id="expanded-1"
+			style="background-color: var(--green);">
+				<i>The filth desecrating Vega's creation must be cleansed! Join the <b>Legion of
+				Vega</b> to help preserve and restore the beauty of this universe! Follow the
+				righteous path and Vega shall grant you her blessing, stray and you will
+				only feel her wrath!</i>
+		</div>
+		<div #expanded2 class="faction-expanded" id="expanded-2" style="background-color: var(--red);">
+			Join the <b>Solar Empire</b> or be crushed by our combined might! There is no pain,
+			no fear and no remorse for those enforcing the will of the Red Empress. 
+			Expand the Empire to the ends of the universe, by any means necessary!	
+		</div>
+		<div #expanded3 class="faction-expanded" id="expanded-3" style="background-color: var(--blue);">
+			No orders, no rulers, only unlimited freedom. Utilize our superior technology
+			and good trade opportunities to achieve all of your goals. Of course, the <b>Azure
+			Nebula</b>'s services are only available to those with sufficient funds.
+		</div>
+
+		<div *ngIf="!show_registration" id="main">
+			<h1>BrowserGame</h1>
+			<div id="side-content">
+					<h2>
+						Survive, endure, adapt and maybe you will someday see yourself rise
+						to the top in this vast 4X open space strategy game!					
+					</h2>
+					<h3>Check out what awaits you!</h3>
+					<button id="demo-button" routerLink="/registration">Demo</button>
+
+					<h3>
+						...or go straight to the action! 
+					</h3>
+					<button id="registration-button" (click)="showHideRegistration()">Register</button>	
+			</div>
+		</div>
+
+		<div *ngIf="show_registration" id="registration">
+			<form [formGroup]="registrationForm" (ngSubmit)="registration()">
+				<h2 style="color: white; margin-right: 5% ;"> Create your account</h2>
+				<input
+				[style]="{'background-color':
+									(regForm.name.valid || regForm.name.pristine) ? 'white' : 'rgb(247, 210, 210)'}"
+				id="name" name="name" type="text" placeholder="Username"
+				formControlName="name">
+					<svg [style]="{'visibility': (regForm.name.valid ) ? 'visible' : 'hidden'}" 
+						class="check-mark" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="green"
+							d="m10.6 16.2l7.05-7.05l-1.4-1.4l-5.65 5.65l-2.85-2.85l-1.4 1.4l4.25 4.25ZM5 21q-.825 0-1.413-.588T3 19V5q0-.825.588-1.413T5 3h14q.825 0 1.413.588T21 5v14q0 .825-.588 1.413T19 21H5Zm0-2h14V5H5v14ZM5 5v14V5Z" />
+					</svg>
+				<div [hidden]="regForm.name.valid || regForm.name.pristine"
+					class="alert-error">
+					Username has to be 3-25 charecters long and have only letters!
+				</div>
+				<input
+					[style]="{'background-color': 
+								(regForm.email.valid || regForm.email.pristine) ? 'white' : 'rgb(247, 210, 210)'}"
+					id="email" name="email" type="text" placeholder="Email"
+					formControlName="email">
+					<svg [style]="{'visibility': (regForm.email.valid ) ? 'visible' : 'hidden'}" 
+						class="check-mark" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="green"
+							d="m10.6 16.2l7.05-7.05l-1.4-1.4l-5.65 5.65l-2.85-2.85l-1.4 1.4l4.25 4.25ZM5 21q-.825 0-1.413-.588T3 19V5q0-.825.588-1.413T5 3h14q.825 0 1.413.588T21 5v14q0 .825-.588 1.413T19 21H5Zm0-2h14V5H5v14ZM5 5v14V5Z" />
+					</svg>
+					<div [hidden]="regForm.email.valid || regForm.email.pristine"
+						class="alert-error">
+						Please enter a valid number!
+					</div>
+				<input 
+					[style]="{'background-color':
+								(regForm.password.valid || regForm.password.pristine) ? 'white' : 'rgb(247, 210, 210)'}"
+					id="logPassword" name="password" type="password" placeholder="Password"
+					formControlName="password">
+						<svg [style]="{'visibility': 
+																			(regForm.password.valid ) ? 'visible' : 'hidden'}" class="check-mark"
+							 width="24" height="24" viewBox="0 0 24 24">
+							<path fill="green"
+								d="m10.6 16.2l7.05-7.05l-1.4-1.4l-5.65 5.65l-2.85-2.85l-1.4 1.4l4.25 4.25ZM5 21q-.825 0-1.413-.588T3 19V5q0-.825.588-1.413T5 3h14q.825 0 1.413.588T21 5v14q0 .825-.588 1.413T19 21H5Zm0-2h14V5H5v14ZM5 5v14V5Z" />
+						</svg>
+					<div [hidden]="regForm.password.valid || regForm.password.pristine"
+						class="alert-error">
+						Password must be at least 8 characters, have 1 uppercase, 1 lowercase and 1 number!
+					</div>
+				<br> 
+				<button (click)="showHideRegistration()" class="registration-back-button" >
+
+				</button>
+				<button [disabled]="!this.registrationForm.valid" class="registration-confirm-button"
+					 type="submit">Register</button>
+					
+			</form>
+		</div>
+
+		<div *ngIf="!show_registration" id="login" >
+			<h2 style="color: white; margin-left: 5%;"> Sign in</h2>
+
+			<form [formGroup]="loginForm"  (ngSubmit)="login()">
+				<input [style]="{'background-color': 
+						(logForm.email.valid || logForm.email.pristine) ? 'white' : 'rgb(247, 210, 210)'}"
+					id="login-email" name="login-email" type="text"
+					placeholder="Email" formControlName="email">
+				
+				<input [style]="{'background-color':
+						(logForm.password.valid || logForm.password.pristine) ? 'white' : 'rgb(247, 210, 210)'}"
+					name="password" type="password" #loginPass
+					placeholder="Password" formControlName ="password" >
+				<svg class="show-pass" #passbtn (click)="showHidePassword(loginPass, passbtn)"  width="24" height="24"
+					viewBox="0 0 24 24">
+					<path fill="black"
+						d="M11.83 9L15 12.16V12a3 3 0 0 0-3-3h-.17m-4.3.8l1.55 1.55c-.05.21-.08.42-.08.65a3 3 0 0 0 3 3c.22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53a5 5 0 0 1-5-5c0-.79.2-1.53.53-2.2M2 4.27l2.28 2.28l.45.45C3.08 8.3 1.78 10 1 12c1.73 4.39 6 7.5 11 7.5c1.55 0 3.03-.3 4.38-.84l.43.42L19.73 22L21 20.73L3.27 3M12 7a5 5 0 0 1 5 5c0 .64-.13 1.26-.36 1.82l2.93 2.93c1.5-1.25 2.7-2.89 3.43-4.75c-1.73-4.39-6-7.5-11-7.5c-1.4 0-2.74.25-4 .7l2.17 2.15C10.74 7.13 11.35 7 12 7Z" />
+				</svg>
+				<br>
+				<button [disabled]="!this.loginForm.valid" 
+					class="log-in-button" type="submit">Login</button>
+			</form>
+		</div>
+	</div>
+</html>

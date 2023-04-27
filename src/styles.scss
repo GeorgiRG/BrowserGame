@@ -2,7 +2,7 @@
 :root {
 	--green: rgb(24, 219, 66, 0.329);
 	--red: rgba(201, 6, 6, 0.329);
-	--blue: rgba(5, 174, 247, 0.329);
+	--blue: rgba(5, 174, 247, 0.529);
 
 }
 html,body {
@@ -16,11 +16,3 @@ html,body {
 	box-sizing: border-box;
 }
 
-.alert-wrong-input{
-	margin-left: 5%;
-	padding: 3px;
-	max-width: fit-content;
-	background-color: white;
-	color: red;
-	border-radius: 10px	;
-}
