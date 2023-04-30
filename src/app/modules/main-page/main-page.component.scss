@@ -1,38 +1,22 @@
-
-* {
-	font-family: 'Times New Roman', Times, serif;
-	color: white;
+.faction, .faction-expanded {
+	display: none;
 }
-.content {
-	width: 100%;
-	height: 100%;
-	padding: 1px;
-	background: url("../../../assets/red.jpg") no-repeat;
-	background-size: 100vw 100vh;
-}
-	.faction, .faction-expanded {
-		display: none;
-	}
-#main,#registration {
-	position: absolute;
-	display: flex;
-	justify-content: center;
-	flex-direction: row;
-	padding: 10px;
-	width: 40%;
-	height: fit-content;
-	top: 55%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-}
-
 #main {
+	height: 42%;
 	padding: 20px;
 	text-shadow: black 0px 0px 20px;
 	border-radius: 15%;
 	border-top-left-radius: 25%;
 	border-bottom-left-radius: 35%;
 	background: linear-gradient(to bottom right, rgba(255, 187, 0, 0.534), rgba(58, 1, 34, 0.438) 70%);
+}
+#side-content {
+	width: 70%;
+	margin: 5%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: fit-content;
 }
 #login {
 	display: flex;
@@ -41,169 +25,26 @@
 	width: 60%;
 	margin: 5%;
 }
-#side-content {
-	margin-left: 5%;
-	display: flex;
-	flex-direction: column;
-}
 
-input, input:invalid {
-	flex-grow: 1;
-	color:black;
-	width: 80%;
-	background-color: rgb(255, 255, 255);
-	margin-top: 1%;
-	margin-bottom: 1%;
-	padding: 10px;
-	padding-right: 35px;
-	box-shadow: 0 0 0;
-	border-radius: 10px;
-	flex-basis: 80%;
-}
-
-.show-pass, .check-mark {
-	box-shadow: none;
-	cursor: pointer;
-	opacity: 70%;
-	margin-left: -30px;
-	transform: translate(0, 20%);
-}	
-
-button {
-	font-weight: lighter;
-	height: 35px;
-	color: white;
-	min-width: 30px;
-	max-width: 200px;
-	width: 25%;
-	box-shadow:
-		-2px -2px 10px cyan;
-	transition: 0.1s ease-in-out;
-	border-radius: 15px;
-}
 .log-in-button {
 	float: right;
 	width: 20%;
 	margin-right: 20%;
 }
-.alert-error {
-	color: red;
-	font-size: 0.9em;
-	width: 100%;
-	flex-grow: 0;
-	padding: 10px;
-	font-weight: lighter;
-	border-radius: 10px;
-	background-color:white;
-	opacity: 80%;
-}
-.registration-button {
-	background: rgb(243, 187, 103);
-}
-.registration-confirm-button {
-	width: 25%;
-	margin-left: 46%;
-	min-width: 50px;
-}
 
-.registration-back-button {
-	height: 30px;
-	width: 4%;
-	border-radius: 0;
-	border: 0;
-	background-color: whitesmoke;
-	clip-path: polygon(40% 0%, 40% 30%, 100% 30%, 100% 70%, 40% 70%, 40% 100%, 0% 50%);
-}
-		#side-content {
-			width: 70%;
-			margin-left: 5%;
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			height: fit-content;
-		}
-@media (max-width: 600px) {
-	#main, #registration{
-		flex-direction: column;
-		height: 50%;
-		width: 95%;
-	}
-	h1{
-		font-size: 1.7em;
-		margin-left: 2%;
-	}
-	h2{
-		font-size: 1.1em;
-	}
-	h3{
-		font-size: 1em;
-	}
-	#login {
-		opacity: 100%;
-	}
 
-	.content {
-		background: url("../../../assets/space.jpg") no-repeat;
-	}
-}
 @media (max-width: 1280px) and (min-width: 600px) {
-	#main,#registration {
-			height: 50%;
-			width: 60%;
-			flex-direction: column		;
-		}
-
-	h1 {
-		font-size: 2em;
-		margin-right: 2%;
-	}
-
-	h2 {
-		font-size: 1.3em;
-	}
-
-	h3 {
-		font-size: 1em;
-	}
 	#login {
 		width: 40%;
-		opacity: 100%;
 	}
-
-
 }
 @media (min-width: 1280px) and (min-height: 600px) {
-
 	.content {
-			width: 100%;
-			height: 100%;
-			padding: 1px;
-			background: url("../../../assets/red.jpg") no-repeat;
-			background-size: 100vw 100vh;
-		}
-	
-	#main, #registration{
-		position: absolute;
-		display: flex;
-		flex-direction: row;
+		background: url("../../../assets/red.jpg") no-repeat;
+		background-size: 100vw 100vh;
+	}
+	#main{
 		align-items: center;
-		padding: 10px;
-		width: 40%;
-		top: 55%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-	}
-
-	#main {
-		padding: 20px;
-		text-shadow: black 0px 0px 20px;
-		border-radius: 15%;
-		border-top-left-radius: 25% ;
-		border-bottom-left-radius: 35%;
-		background: linear-gradient(to bottom right, rgba(255, 187, 0, 0.534),rgba(58, 1, 34, 0.438) 70% );
-	}
-	input:hover, input:focus {
-		box-shadow: -2px -2px 30px lightpink;
 	}
 	#factions {
 		display: flex;
@@ -213,6 +54,21 @@ button {
 		height: 10%;
 		width: 15%;
 		transform: translate(-50%, 0);
+	}
+	#factions span:nth-child(1){
+						box-shadow:
+						inset 10px -5px 10px rgb(160, 255, 180),
+						inset -10px -5px 10px rgb(160, 255, 180);
+	}
+	#factions span:nth-child(2) {
+				box-shadow:
+						inset 7px -5px 10px black,
+						inset -7px -5px 10px black;
+	}
+	#factions span:nth-child(3) {
+				box-shadow:
+						inset 7px -5px 10px cyan,
+						inset -7px -5px 10px cyan;
 	}
 	.faction, .faction-expanded {
 		display: block;
@@ -228,8 +84,8 @@ button {
 		justify-content: center;
 		display: none;
 		top: 10%;
-		height: 20%;
-		width: 35%;
+		height: 12%;
+		width: 30%;
 		padding: 10px;
 		border-radius: 10%;
 	}
@@ -241,12 +97,12 @@ button {
 	#expanded-1 {
 		left: 43%;
 		padding: 2%;
+				box-shadow:
+						0px 0px 20px olivedrab,
+						inset 20px 0 10px rgb(160, 255, 180),
+						inset -20px 0 10px rgb(160, 255, 180);
 		font-family: Impact, Haettenschweiler, 'Arial Narrow	', sans-serif;
 		border-top-left-radius: 0;
-		box-shadow:
-			0px 0px 20px olivedrab,
-			inset 20px 0 20px rgb(160, 255, 180),
-			inset -20px 0 20px rgb(160, 255, 180);
 		animation: 0.6s ease expand-1;
 	}
 	@keyframes expand-1 {
@@ -255,8 +111,8 @@ button {
 			height: 0;
 		}
 		100% {
-			width: 35%;
-			height: 20%;
+			width: 30%;
+			height: 12%;
 		}
 	}
 	#expanded-2 {
@@ -274,11 +130,11 @@ button {
 			height: 0;
 		}
 		100% {
-			height: 20%;
+			height: 12%;
 		}
 	}
 	#expanded-3 {
-		left: 22%;
+		left: 23%;
 		padding: 2%;
 		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 		text-shadow: purple 0px 0px 1px;
@@ -300,7 +156,7 @@ button {
 		100% {
 			margin-right: 0;
 			transform: scaleX(1);
-			height: 20%;
+			height: 12%;
 		}
 	}
 	#login{
@@ -315,32 +171,5 @@ button {
 	#login:hover{
 		opacity: 100%;
 	}
-	button:hover:disabled {
-		background: red;
-	}
-	button:hover:enabled {
-		background: rgb(193, 252, 179);
-		box-shadow: -2px -2px 10px rgb(159, 231, 159) ;
-	}
 
-	#main, #registration, #login, #content {
-		animation: 0.6s ease-out fadeIn;
-	}
-	@keyframes fadeIn {
-		from {
-			opacity: 0;
-		}
-		to {
-			opacity: 1;
-		}
-	}
-}
-@media (max-height: 640px) {
-	#main,
-		#registration {
-			height: 70%;
-			width: 50%;
-			left: 0%;
-			transform: translate(0, -50%);
-	}
 }

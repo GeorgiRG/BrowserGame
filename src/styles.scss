@@ -1,8 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
-	--green: rgb(24, 219, 66, 0.329);
-	--red: rgba(201, 6, 6, 0.329);
-	--blue: rgba(5, 174, 247, 0.529);
+	--green: rgb(24, 219, 66, 0.7);
+	--red: rgba(201, 6, 6, 0.7);
+	--blue: rgba(5, 174, 247, 0.7);
 
 }
 html,body {
@@ -12,7 +12,116 @@ html,body {
 	width: 100vw;
 }
 
-* {
+button, input{
 	box-sizing: border-box;
 }
+.icon-inside {
+	box-shadow: none;
+	cursor: pointer;
+	opacity: 70%;
+	margin-left: -30px;
+	transform: translate(0, 30%);
+}
+.center-flex {
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	flex-direction: row;
+	padding: 10px;
+	width: 40%;
+	height: fit-content;
+	top: 60%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	
+}
+* {
+	font-family: 'Times New Roman', Times, serif;
+	color: white;
+}
+
+.content {
+	width: 100%;
+	height: 100%;
+	background: url("/assets/red.jpg") no-repeat;
+	background-size: 100vw 100vh;
+}
+button {
+	font-weight: lighter;
+	height: 35px;
+	color: white;
+	min-width: 30px;
+	max-width: 200px;
+	width: 25%;
+	box-shadow:
+		-2px -2px 6px rgb(0, 162, 255);
+	transition: 0.1s ease-in-out;
+	border-radius: 15px;
+}
+.alert-error {
+	color: red;
+	font-size: 0.9em;
+	width: 80%;
+	flex-grow: 0;
+	padding: 10px;
+	font-weight: lighter;
+	border-radius: 10px;
+	background-color: white;
+	opacity: 80%;
+}
+input, input:invalid {
+	flex-grow: 1;
+	color: black;
+	width: 80%;
+	background-color: rgb(255, 255, 255);
+	margin-top: 1%;
+	margin-bottom: 1%;
+	padding: 10px;
+	padding-right: 35px;
+	box-shadow: 0 0 0;
+	border-radius: 10px;
+}
+input:hover, input:focus {
+	box-shadow: -2px -2px 30px lightpink;
+}
+button:hover:disabled {
+	background: red;
+}
+
+button:hover:enabled {
+	background: rgb(193, 252, 179);
+	box-shadow: -2px -2px 10px rgb(159, 231, 159);
+}
+@media (max-width: 600px) {
+	.center-flex {
+		flex-direction: column;
+		height: 50%;
+		width: 85%;
+	}
+	h1{font-size: 1.7em; margin-left: 2%;}
+	h2{font-size: 1.1em;}
+	h3{font-size: 1em;}
+	.content {
+		background: url("/assets/space.jpg") no-repeat;
+			background-size: 100vw 100vh;
+	}
+}
+@media (max-width: 1280px) and (min-width: 600px) {
+	.center-flex {
+		height: 50%;
+		width: 60%;
+		flex-direction: column;
+	}
+	h1{font-size: 2em;margin-right: 2%;}
+	h2{font-size: 1.3em;}
+	h3{font-size: 1em;	}
+	.content {
+		background: url("/assets/space.jpg") no-repeat;
+			background-size: 100vw 100vh;
+	}
+	#login {
+		width: 40%;
+		opacity: 100%;
+	}
+}	
 
