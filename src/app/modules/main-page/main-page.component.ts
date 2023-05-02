@@ -3,7 +3,6 @@
 */
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from 'src/app/shared/models/User';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient, HttpClientModule, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { HttpHeaders,  } from '@angular/common/http';

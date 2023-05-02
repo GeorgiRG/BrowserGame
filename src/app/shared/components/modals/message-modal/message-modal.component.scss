@@ -1,0 +1,30 @@
+#backgroundDimmer{
+	display: none;
+	position: fixed;
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.514);
+	height: 100%;
+	z-index: 100;
+}
+.modal{
+		position: fixed;
+		display: flex;
+		background: rgba(255, 0, 0, 0.815);
+		flex-direction: row;
+		padding: 10px;
+		width: fit-content;
+		min-width: 100px;
+		height: fit-content;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+}
+p{
+	width: 90%;
+	padding-right: 30px;
+}
+.icon-inside{
+	opacity: 100%;
+	background-color: rgba(128, 128, 128, 0.212);
+	padding-top: 5px;
+}

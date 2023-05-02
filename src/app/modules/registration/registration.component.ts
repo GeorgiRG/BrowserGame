@@ -1,19 +1,21 @@
 import { Component } from '@angular/core';
 import { Location } from '@angular/common';
-import { Observable, pipe, throwError, of } from 'rxjs';
-import { catchError, map, retry, retryWhen } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { HttpClient, HttpClientModule, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
+import { ModalService } from 'src/app/shared/services/modal.service';
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss']
 })
-export class RegistrationComponentnent {
+export class RegistrationComponent {
 
   constructor(
+    private msgSrvc : ModalService,
     private location: Location,
     private http: HttpClient
   ) {}
@@ -21,6 +23,7 @@ export class RegistrationComponentnent {
   submitted: boolean = false;
 
   goBack() {
+
     this.location.back();
   }
   showHidePassword(input: HTMLInputElement, btn: HTMLElement) {
@@ -34,25 +37,27 @@ export class RegistrationComponentnent {
     }
   }
   registrationForm = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.pattern(/^([A-Za-z](')?(_)?(-)?){3,25}$/)]),
+    name: new FormControl('', [Validators.required, Validators.pattern(/^([A-Za-zЁёА-яÖÄöä](')?(_)?(-)?){3,25}$/)]),
     email: new FormControl('', [Validators.maxLength(255), Validators.required, Validators.pattern(/^[\w-\.]+@([\w -]+\.)+[\w-]{2,4}$/)]),
     password: new FormControl('', [Validators.required, Validators.pattern(/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}/)]),
   })
   get regForm() { return this.registrationForm.controls }
   
-
   registration() {
+    this.msgSrvc.showMsg("works?")
     console.log("submitting stuff")
     this.submitted = true;
     this.http.post("https://localhost:7017/users", this.registrationForm.value, {observe : 'response'}).pipe(
       catchError((error : Error) => {
-        console.log("from register", error.message)
+        console.log(error.message)
         return of(false)
       })
     ).subscribe(
-        (data : any)  => {
-          if(data === false) { console.log("bad bad")} else {
-          console.log('HTTP response', data.message, data)}
-        })
+      (data : any)  => {
+        if(data !== false) { 
+
+        console.log('HTTP response', data.message, data)
+        }
+      })
   }
 }
