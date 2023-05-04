@@ -31,6 +31,10 @@ export class HttpErrorHandlerInterceptor implements HttpInterceptor {
     if (error.status === 404 || error.status >= 500) {
       return timer(delayCount * 1000)
     }    
+    else if(error.status < 400) {
+      return throwError(() => new Error("Server down"));
+
+    }
     else {
       console.log("400 thrown")
       //server returns HttpResponse: {error: {message:"", errors:""}}

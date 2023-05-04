@@ -9,10 +9,13 @@
 .modal{
 		position: fixed;
 		display: flex;
+		white-space: pre-wrap ;
 		background: rgba(255, 0, 0, 0.815);
 		flex-direction: row;
-		padding: 10px;
-		width: fit-content;
+		padding: 20px;
+		width: 35%;
+		border-radius: 15px;
+		text-align: center;
 		min-width: 100px;
 		height: fit-content;
 		top: 50%;

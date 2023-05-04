@@ -12,6 +12,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HttpErrorHandlerInterceptor } from './core/interceptors/http-error-handler.interceptor';
 import { GlobalErrorHandler } from './core/services/global-error-handler.service';
 import { MessageModalComponent } from './shared/components/modals/message-modal/message-modal.component';
+import { IconsModule } from './shared/icons/icons.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { MessageModalComponent } from './shared/components/modals/message-modal/
     AppRoutingModule,
     ReactiveFormsModule,
     CommonModule,
-    
+    IconsModule,
     FormsModule,
   ],
   providers: [

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Location } from '@angular/common';
-import { of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Subject, of } from 'rxjs';
+import { catchError, debounceTime, tap } from 'rxjs/operators';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { HttpClient} from '@angular/common/http';
@@ -18,45 +18,84 @@ export class RegistrationComponent {
     private msgSrvc : ModalService,
     private location: Location,
     private http: HttpClient
-  ) {}
+  ) { }
+  ngOnInit() {
+    this.registrationForm.controls['name'].valueChanges.pipe(debounceTime(1000))
+      .subscribe(username => {
+        this.http.get(`https://localhost:7017/users/check?username=${username}`)
+          .pipe(catchError(error => { //just to remove loading on error, error handled later
+              this.userLoading == false;
+              return of(true)
+            })
+            ) //Response returns boolean
+          .subscribe(usernameExists => {
+            this.userLoading = false
+            if (usernameExists) {
+              this.registrationForm.controls['name'].setErrors({ 'incorrect': true })
+              this.userExists = true
+            }
+            else{ this.userExists = false}
+          })
+        }
+      )
+    this.registrationForm.controls['email'].valueChanges.pipe(debounceTime(1000))
+      .subscribe(email => {
+        this.http.get(`https://localhost:7017/users/check?email=${email}`)
+          .pipe(catchError(error => { //...removing loading
+            this.emailLoading == false;
+            return of(true)
+          }))
+          .subscribe(emailExists => {
+            this.emailLoading = false
+            if (emailExists) {
+              this.registrationForm.controls['email'].setErrors({ 'incorrect': true })
+              this.emailExists = true
+            }
+            else { this.emailExists = false }
 
-  submitted: boolean = false;
-
-  goBack() {
-
-    this.location.back();
+          })
+      }
+    ) 
   }
-  showHidePassword(input: HTMLInputElement, btn: HTMLElement) {
-    if (input.type === 'password') {
-      input.type = 'text'
-      btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="black" d="M12 9a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5a5 5 0 0 1 5-5a5 5 0 0 1 5 5a5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5Z"/></svg>'
-    }
-    else {
-      input.type = 'password'
-      btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="black" d="M11.83 9L15 12.16V12a3 3 0 0 0-3-3h-.17m-4.3.8l1.55 1.55c-.05.21-.08.42-.08.65a3 3 0 0 0 3 3c.22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53a5 5 0 0 1-5-5c0-.79.2-1.53.53-2.2M2 4.27l2.28 2.28l.45.45C3.08 8.3 1.78 10 1 12c1.73 4.39 6 7.5 11 7.5c1.55 0 3.03-.3 4.38-.84l.43.42L19.73 22L21 20.73L3.27 3M12 7a5 5 0 0 1 5 5c0 .64-.13 1.26-.36 1.82l2.93 2.93c1.5-1.25 2.7-2.89 3.43-4.75c-1.73-4.39-6-7.5-11-7.5c-1.4 0-2.74.25-4 .7l2.17 2.15C10.74 7.13 11.35 7 12 7Z"/></svg>'
-    }
-  }
+  //adding check if username or emails exist
+  userExists: boolean = false;
+  emailExists: boolean = false;
+  //bools for the icons
+  userLoading: boolean = false;
+  emailLoading: boolean = false;
   registrationForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.pattern(/^([A-Za-zЁёА-яÖÄöä](')?(_)?(-)?){3,25}$/)]),
     email: new FormControl('', [Validators.maxLength(255), Validators.required, Validators.pattern(/^[\w-\.]+@([\w -]+\.)+[\w-]{2,4}$/)]),
-    password: new FormControl('', [Validators.required, Validators.pattern(/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}/)]),
+    password: new FormControl('', [Validators.required, Validators.pattern(/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,64}/)]),
   })
+  emailCode = new FormControl('', [Validators.required, Validators.pattern(/^[0-9]{6}$/)])
   get regForm() { return this.registrationForm.controls }
-  
+  get confirmCode() { return this.emailCode }
+
+
+
+  goBack() {
+    this.location.back();
+  }
+
+  registerLoading: boolean = false;
+  registered: boolean = false;
   registration() {
-    this.msgSrvc.showMsg("works?")
+    this.registerLoading = true;
+
+    this.registrationForm.setErrors({invalid: 'true'})
     console.log("submitting stuff")
-    this.submitted = true;
     this.http.post("https://localhost:7017/users", this.registrationForm.value, {observe : 'response'}).pipe(
       catchError((error : Error) => {
-        console.log(error.message)
+        this.msgSrvc.showMsg("There were errors in user creation.\nReason: " + error.message)
+        this.registerLoading = false;
         return of(false)
       })
     ).subscribe(
       (data : any)  => {
         if(data !== false) { 
-
-        console.log('HTTP response', data.message, data)
+          this.registered = true;
+          console.log('HTTP response', data.message, data)
         }
       })
   }
