@@ -41,9 +41,9 @@
 					to the top in this vast 4X open space strategy game!					
 				</h2>
 				<h3>Check out what awaits you!</h3>
-				<button id="demo-button" routerLink="/registration">Demo</button>
+				<button id="demo-button">Demo</button>
 				<h3>...or go straight to the action! </h3>
-				<button id="registration-button" routerLink="/register">Register</button>	
+				<button id="registration-button" routerLink="/registration">Register</button>	
 			</div>
 		</div>
 
@@ -61,8 +61,11 @@
 					name="password" id="loginPass" type="password"
 					placeholder="Password" formControlName ="password" >
 						<icon-eye [inputId]="'loginPass'"></icon-eye>
-
 				<br>
+				<div>
+				<label style="font-size: small;">Remember me</label>
+				<input style="transform: translate(-49%, 0);" #rememberMe type="checkbox">
+				</div>
 				<button [disabled]="!this.loginForm.valid" 
 					class="log-in-button" type="submit">Login</button>
 			</form>

@@ -16,6 +16,9 @@ export class HttpErrorHandlerInterceptor implements HttpInterceptor {
     private msgSrvc: ErrorMessageService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+    request = request.clone({
+      withCredentials: true
+    });
     return next.handle(request).pipe(
       retry({
         count: 1,
@@ -31,14 +34,15 @@ export class HttpErrorHandlerInterceptor implements HttpInterceptor {
     if (error.status === 404 || error.status >= 500) {
       return timer(delayCount * 1000)
     }    
-    else if(error.status < 400) {
+    else if(error.status < 200) {
+      console.log(error)
       return throwError(() => new Error("Server down"));
-
     }
     else {
       console.log("400 thrown")
       //server returns HttpResponse: {error: {message:"", errors:""}}
-      return throwError(() => new Error(error.error.errors));
+      console.log(error)
+      return throwError(() => new Error(error.error));
     }
   }
 }
