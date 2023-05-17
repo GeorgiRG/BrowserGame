@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<div class="content" id="content">
+	<!--Faction
+			selection-->
+	<div *ngIf="this.page==1" class="char-creation-panels">
+		<div class="summary">
+			<h2 style="height: fit-content;">Select your faction MOVE LEFT</h2>
+			<h3>
+				Join one of the three factions battling for superiority or choose the difficult
+				but free path. Every faction offers different units, buildings and technologies.
+				Fullfilling their demands will build up you favor with them while
+				completely disregarding their orders will eventually turn you into one of their
+				enemies!
+				<br><br>
+				You can drift away or towards different factions throught your game and 
+				your initial choice only matters for the start of your game.
+			</h3>
+		</div>
+		<div class="panels" >
+			<div (click)="this.selectedFaction = 'Vega'"
+				[style]="{'box-shadow': this.selectedFaction == 'Vega' ? '0 0 20px white' : 'none'}"
+				class="faction-choice" style="background-color: var(--green);">
+				<h3>Legion of Vega</h3>
+				<h4 style="background: black;">Faction Icon</h4>
+			</div>
+			<div (click)="this.selectedFaction = 'Solar'"
+				[style]="{'box-shadow': this.selectedFaction == 'Solar' ? '0 0 20px white' : 'none'}"
+				class="faction-choice" style="background-color: var(--red);">
+				<h3>Solar Empire</h3>
+				<h4 style="background: black;" >Faction Icon</h4>
+			</div>
+			<div (click)="this.selectedFaction = 'Azure'"
+				[style]="{'box-shadow': this.selectedFaction == 'Azure' ? '0 0 20px white' : 'none'}"	
+				class="faction-choice" style="background-color: var(--blue);">
+				<h3>Azure Nebula</h3>
+				<h4 style="background: black;">Faction Icon</h4>
+			</div>
+				<div (click)="this.selectedFaction = 'Unaffiliated'"
+					[style]="{'box-shadow': this.selectedFaction == 'Unaffiliated' ? '0 0 20px white' : 'none'}"
+					class="faction-choice" style="background-color: lightgrey;">
+					<h3>Unaffiliated</h3>
+					<h4 style="background: black;">Faction Icon</h4>
+				</div>
+		</div>
+		<div *ngIf="this.selectedFaction == 'Vega'" class="description">
+			<div class="details">
+				<h4>Green faction:</h4>
+				<p>-Has this</p>
+				<p>-has that</p>
+				<p>-stuff (long text stuff and stuff and more stuff and text and stuff
+					and text and stuff and then more and then stuff and then more and text)</p>
+				<p>-more (long text stuff and stuff and more stuff)</p>
+				<p>-even more stuff</p>
+			</div>
+			<div class="example-pic">Example of a Vega faction colony</div>
+		</div>
+		<div *ngIf="this.selectedFaction == 'Solar'" class="description">
+			<div class="details">
+				<h4>Red faction:</h4>
+				<p>-Has this</p>
+				<p>-has that and then more and then stuff and then more and tex</p>
+				<p>-stuff (long text stuff and stuff and more stuff and text and stuff
+					and text and stuff and then more and then stuff and then more and text)
+				</p>
+				<p>-more (long text stuff and stuff and more stuff)</p>
+				<p>-even more stuff</p>
+			</div>
+			<div class="example-pic">Example of a Solar empire colony</div>
+		</div>
+		<div *ngIf="this.selectedFaction == 'Azure'" class="description">
+			<div class="details">
+				<h4>Blue faction:</h4>
+				<p>-Has this and stuff and stuff and more stuff</p>
+				<p>-has that</p>
+				<p>-stuff (long text stuff and stuff and more stuff and text and stuff
+					and text and stuff and then more and then stuff and then more and text)
+				</p>
+				<p>-more (long text stuff and stuff and more stuff)</p>
+				<p>-even more stuff</p>
+			</div>
+			<div class="example-pic">Example of a Azure Nebula colony</div>
+		</div>
+			<div *ngIf="this.selectedFaction == 'Unaffiliated'" class="description">
+				<div class="details">
+					<h4>Unaffiliated faction:</h4>
+					<p>-Can be attacked by any faction</p>
+					<p>-Allows playing as Robots or Parasites</p>
+					<p>-Can make deals to acquire some faction specific buildings or research</p>
+				</div>
+				<div class="example-pic">Example of a Unaffiliated faction town</div>
+			</div>
+		<div id="buttons">
+			<button [disabled]="this.selectedFaction == ''"type="button" class="forward-button" (click)="this.page=2"></button>
+		</div>
+	</div>
+	<!--Species
+			selection-->
+	<div *ngIf="this.page==2" class="char-creation-panels">
+		<div class="summary">
+			<h2 style="height: fit-content;">Select your species MOVE LEFT</h2>
+			<h3>
+				Choose the species of your character. Each has their own stregths and
+				weaknesses. The order of species below shows how much would they another species
+				if they were in the same colony. For example, Aquatics will hate Liths but 
+				tolerate Humans. Parasites and Robots are hated equally by all.
+			</h3>
+		</div>
+		<div class="panels">
+			<div (click)="this.selectedSpecies = 'Aquatics'"
+				[style]="{'box-shadow': this.selectedSpecies == 'Aquatics' ? '0 0 20px white' : 'none'}"
+				class="faction-choice" style="background-color: purple;">
+				<h3>Aquatics</h3>
+				<h4 style="background: black;">Species Icon</h4>
+			</div>
+			<div (click)="this.selectedSpecies = 'Humans'"
+				[style]="{'box-shadow': this.selectedSpecies == 'Humans' ? '0 0 20px white' : 'none'}"
+				class="faction-choice" style="background-color: bisque">
+				<h3>Humans</h3>
+				<h4 style="background: black;">Species Icon</h4>
+			</div>
+			<div (click)="this.selectedSpecies = 'Insects'"
+				[style]="{'box-shadow': this.selectedSpecies == 'Insects' ? '0 0 20px white' : 'none'}"
+				class="faction-choice" style="background-color: greenyellow">
+				<h3>Insects</h3>
+				<h4 style="background: black;">Species Icon</h4>
+			</div>
+			<div (click)="this.selectedSpecies = 'Liths'"
+				[style]="{'box-shadow': this.selectedSpecies == 'Liths' ? '0 0 20px white' : 'none'}"
+				class="faction-choice" style="background-color: brown">
+				<h3>Liths</h3>
+				<h4 style="background: black;">Species Icon</h4>
+			</div>
+			<div *ngIf="this.selectedFaction =='Unaffiliated'" 
+			 	(click)="this.selectedSpecies = 'Robots'"
+				[style]="{'box-shadow': this.selectedSpecies == 'Robots' ? '0 0 20px white' : 'none'}"
+				class="faction-choice" style="background-color: silver;">
+				<h3>Robots</h3>
+				<h4 style="background: black;">Species Icon</h4>
+			</div>
+			<div *ngIf="this.selectedFaction =='Unaffiliated'"
+				(click)="this.selectedSpecies = 'Parasites'"
+				[style]="{'box-shadow': this.selectedSpecies == 'Parasites' ? '0 0 20px white' : 'none'}"
+				class="faction-choice" style="background-color: rgb(0, 0, 0)">
+				<h3>Parasites</h3>
+				<h4 style="background: black;">Species Icon</h4>
+			</div>
+		</div>
+
+		<div *ngIf="this.selectedSpecies == 'Aquatics'" class="description">
+			<div class="details-species">
+				<h4>The aquatic species: Uncontested intelligence but lacking physical capabilities</h4>
+				<p>Comfortable temperature range and terrain: -5C - 15C / Water</p>
+				<p style="color: green">2.5x research speed </p>
+				<p style="color: green">1.5x reproduction speed</p>
+				<p style="color: green">1.15x manufacturing/fabrication speed</p>
+				<p style="color: red">0.5x combat stregth</p>
+				<p style="color: red">2x suit complexity</p>
+			</div>
+		</div>
+		<div *ngIf="this.selectedSpecies == 'Humans'" class="description">
+			<div class="details-species">
+				<h4>The human species: Can learn to do anything but lacks the will to do it</h4>
+				<p>Comfortable temperature range and terrain: 10C - 40C / Land</p>
+				<p style="color: green">No bonuses or penalties</p>
+				<p style="color: red">- #some number loyalty</p>
+			</div>
+		</div>
+		<div *ngIf="this.selectedSpecies == 'Insects'" class="description">
+			<div class="details-species">
+				<h4>The insect species: Numerous, loyal, with many useful arms</h4>
+				<p>Comfortable temperature range and terrain: 35C - 85C / Land</p>
+				<p style="color: green">3x reproduction speed</p>
+				<p style="color: green">1.5x manufacturing/fabrication speed</p>
+				<p style="color: green">+ #some number loyalty </p>
+				<p style="color: red">0.5x research speed</p>
+				<p style="color: red">0.8x combat stregth</p>
+				<p style="color: red">1.5x suit complexity</p>
+			</div>
+		</div>
+		<div *ngIf="this.selectedSpecies == 'Liths'" class="description">
+			<div class="details-species">
+				<h4>The lith species: About what you would expect from sentient rocks</h4>
+				<p>Comfortable temperature range and terrain: 90C - 150C / Any</p>
+				<p style="color: green">2x combat stregth</p>
+				<p style="color: green">Can handle outer space conditions unprotected</p>
+				<p style="color: red">0.5x suit complexity</p>
+				<p style="color: red">0.5x reproduction speed</p>
+				<p style="color: red">0.8x manufacturing/fabrication speed</p>
+			</div>
+		</div>
+		<div *ngIf="this.selectedSpecies == 'Robots'" class="description">
+			<div class="details-species">
+				<h4>The Robots: Due previous actions of their kind they are despised by everyone.</h4>
+				<p>Comfortable temperature range and terrain: -100C - 100C / Any</p>
+				<p style="color: green">No penalties, can also construct specialized robots</p>
+				<p style="color: green">Can handle outer space conditions unprotected</p>
+				<p style="color: red">Can't reproduce naturally</p>
+				<p style="color: red">Having other species causes rebellions</p>
+			</div>
+		</div>
+		<div *ngIf="this.selectedSpecies == 'Parasites'" class="description">
+			<div class="details-species">
+				<h4>The parasitic species: Can take over any other species as host, extremely loyal</h4>
+				<p>Comfortable temperature range and terrain: Species dependent</p>
+				<p style="color: green">Host dependant bonuses and penalties</p>
+				<p style="color: green">+ #massive number loyalty</p>
+				<p style="color: red">Can't reproduce naturally, requires acquiring host species</p>
+			</div>
+		</div>		
+		<div id="buttons">
+			<button type="button" class="back-button" (click)="this.page=1"></button>
+			<button [disabled]="this.selectedSpecies==''"type="button" class="forward-button" (click)="this.page=3"></button>
+		</div>
+	</div>
+	<!--Stats
+			selection-->
+	<div *ngIf="this.page==3" class="char-creation-panels">
+		<div class="summary">
+			<h2 style="height: fit-content;">Select your character skills MOVE LEFT</h2>
+			<h3>
+				Choose your starting governing capabilities! Throughout your game you will
+				be able to improve these stats by acquiring experience, items or traits.
+				If you are lacking in some skill you can hire teammates and governors with
+				better stats which will add to yours. Keep in mind those wanting to join 
+				your team will depend on your species, faction and fame.
+			</h3>
+		</div>
+		<h5 style="margin-top: 10%;margin-left: 40%;">Available points <br>	{{this.availablePower}}</h5>
+		<div class="stat-headers">
+				<h5>Space Warfare</h5>
+				<h5>Land Warfare</h5>
+				<h5>Research</h5>
+				<h5>Engineering</h5>
+				<h5>Economy</h5>
+
+		</div>
+		<div class="stats">
+				<div class="stat-toggle">
+					<button [disabled]="this.spaceWarfare == 5"
+						(click)="decrease(1)" class="decrease-btn">
+					</button>
+					<h5>{{this.spaceWarfare}}</h5>
+					<button [disabled]="this.spaceWarfare == 20 || this.availablePower == 0"
+						(click)="increase(1)" class="increase-btn">
+					</button>
+				</div>
+				<div class="stat-toggle">
+					<button 
+						[disabled]="this.landWarfare == 5"
+						(click)="decrease(2)" 
+						class="decrease-btn">
+					</button>
+					<h5>{{this.landWarfare}}</h5>
+					<button 
+						[disabled]="this.landWarfare == 20 || this.availablePower == 0"
+						(click)="increase(2)" 
+						class="increase-btn">
+					</button>
+				</div>
+				<div class="stat-toggle">
+					<button [disabled]="this.research== 5"
+						(click)="decrease(3)" class="decrease-btn">
+					</button>
+					<h5>{{this.research}}</h5>
+					<button [disabled]="this.research == 20 || this.availablePower == 0"
+						(click)="increase(3)" class="increase-btn">
+					</button>
+				</div>
+				<div class="stat-toggle">
+					<button [disabled]="this.engineering == 5"
+						(click)="decrease(4)" class="decrease-btn">
+					</button>
+					<h5>{{this.engineering}}</h5>
+					<button [disabled]="this.engineering == 20 || this.availablePower == 0"
+						(click)="increase(4)" class="increase-btn">
+					</button>
+				</div>
+				<div class="stat-toggle">
+					<button [disabled]="this.economy == 5"
+						(click)="decrease(5)" class="decrease-btn">
+					</button>
+					<h5>{{this.economy}}</h5>
+					<button [disabled]="this.economy == 20 || this.availablePower == 0"
+						(click)="increase(5)" class="increase-btn">
+					</button>
+				</div>
+		</div>
+		<div id="buttons">
+			<button type="button" class="back-button" (click)="this.page=2"></button>
+			<button [disabled]="this.availablePower > 0" type="button" class="forward-button" (click)="checkInput()"></button>
+		</div>
+	</div>
+	<!--Confirm 
+			page-->
+	<div *ngIf="this.page==4" class="char-creation-panels" style="width: fit-content;">
+			<h2>Confirm your selection MOVE LEFT</h2>
+			<h3>Selected faction: {{this.selectedFaction}}</h3>
+			<h3>Selected species: {{this.selectedSpecies}}</h3>
+			<h3>Selected stats: 
+				<p>&emsp;Space Warfare: {{this.spaceWarfare}}</p>
+				<p>&emsp;Land Warfare: {{this.landWarfare}}</p>
+				<p>&emsp;Research: {{this.research}}</p>
+				<p>&emsp;Engineering: {{this.engineering}}</p>
+				<p>&emsp;Economy: {{this.economy}}</p>
+			</h3>
+			
+			<h2 *ngIf="!this.canSubmit"
+				style="color: orangered; background-color: rgba(250, 235, 215, 0.952);">
+					There are errors in your inputs, please check it!
+			</h2>
+
+		<div id="buttons">
+			<button type="button" class="back-button" (click)="this.page=3"></button>
+			<button [disabled]="!this.canSubmit" type="button" style="float:right;	margin-top: 20px;" (click)="this.page=4">Submit</button>
+		</div>
+	</div>
+</div>
+
+</html>

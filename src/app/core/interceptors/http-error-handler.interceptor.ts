@@ -25,24 +25,18 @@ export class HttpErrorHandlerInterceptor implements HttpInterceptor {
         delay: (this.shouldRetry),
       }),
       catchError((error: HttpErrorResponse) : Observable<any> => {
-        let message : string = this.msgSrvc.checkError(error.status, error.message)
-        return throwError(() => new Error(message))
+        this.msgSrvc.checkError(error)
+        return of()
       })
     )
   }
   private shouldRetry(error: HttpErrorResponse, delayCount : number) {
     if (error.status === 404 || error.status >= 500) {
       return timer(delayCount * 1000)
-    }    
-    else if(error.status < 200) {
-      console.log(error)
-      return throwError(() => new Error("Server down"));
     }
     else {
-      console.log("400 thrown")
-      //server returns HttpResponse: {error: {message:"", errors:""}}
-      console.log(error)
-      return throwError(() => new Error(error.error));
+      console.log("400 thrown\n", error)
+      return throwError(() => error);
     }
   }
 }

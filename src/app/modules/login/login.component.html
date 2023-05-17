@@ -1,8 +1,86 @@
+<!DOCTYPE html>
+<html>
+<div class="content" id="content">
+	<div id="factions">
+		<span (mouseleave)="hideDetails(expanded1)"
+			(mouseenter)="showDetails(expanded1, 'green')" class="faction"
+			style="background-color: var(--green);">f
+		</span>
+		<span (mouseleave)="hideDetails(expanded2)"
+			(mouseenter)="showDetails(expanded2, 'red')" class="faction"
+			style="background-color:  var(--red);">f
+		</span>
+		<span (mouseleave)="hideDetails(expanded3)"
+			(mouseenter)="showDetails(expanded3, 'blue')" class="faction"
+			style="background-color: var(--blue);">f
+		</span>
+	</div>
+	<div #expanded1 class="faction-expanded" id="expanded-1"
+		style="background-color: var(--green);">
+		<i>The filth desecrating Vega's creation must be cleansed! Join the
+			<b>Legion of
+				Vega</b> to help preserve and restore the beauty of this universe!
+			Follow the
+			righteous path and Vega shall grant you her blessing, stray and you will
+			only feel her wrath!</i>
+	</div>
+	<div #expanded2 class="faction-expanded" id="expanded-2"
+		style="background-color: var(--red);">
+		Join the <b>Solar Empire</b> or be crushed by our combined might! There is
+		no pain,
+		no fear and no remorse for those enforcing the will of the Red Empress.
+		Expand the Empire to the ends of the universe, by any means necessary!
+	</div>
+	<div #expanded3 class="faction-expanded" id="expanded-3"
+		style="background-color: var(--blue);">
+		No orders, no rulers, only unlimited freedom. Utilize our superior
+		technology
+		and good trade opportunities to achieve all of your goals. Of course, the
+		<b>Azure
+			Nebula</b>'s services are only available to those with sufficient funds.
+	</div>
 
+	<div class="center-flex" id="main">
+		<h1>BrowserGame</h1>
+		<div id="side-content">
+			<h2>
+				Survive, endure, adapt and maybe you will someday see yourself rise
+				to the top in this vast 4X open space strategy game!
+			</h2>
+			<h3>Check out what awaits you!</h3>
+			<button id="demo-button">Demo</button>
+			<h3>...or go straight to the action! </h3>
+			<button id="registration-button"
+				routerLink="/registration">Register</button>
+		</div>
+	</div>
 
-<div class="main-page">
-	<a routerLink="/registration">Registration</a>
-	<h2>Test entry</h2>
-	<button class="registration-button"> registration</button>
-	<button class="login-button">another</button>
+	<div id="login">
+		<h2 style="color: white; margin-left: 5%;"> Sign in</h2>
+
+		<form [formGroup]="loginForm" (ngSubmit)="login()">
+			<input
+				[style]="{'background-color': 
+						(logForm.email.valid || logForm.email.pristine) ? 'white' : 'rgb(247, 210, 210)'}"
+				id="login-email" name="login-email" type="text" placeholder="Email"
+				formControlName="email">
+
+			<input
+				[style]="{'background-color':
+						(logForm.password.valid || logForm.password.pristine) ? 'white' : 'rgb(247, 210, 210)'}"
+				name="password" id="loginPass" type="password" placeholder="Password"
+				formControlName="password">
+			<icon-eye [inputId]="'loginPass'"></icon-eye>
+			<br>
+			<div>
+				<label style="font-size: small;">Remember me</label>
+				<input style="transform: translate(-49%, 0);" #rememberMe
+					type="checkbox">
+			</div>
+			<button [disabled]="!this.loginForm.valid" class="log-in-button"
+				type="submit">Login</button>
+		</form>
+	</div>
 </div>
+
+</html>

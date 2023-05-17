@@ -33,13 +33,26 @@ html,body {
 	top: 60%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	
 }
 * {
 	font-family: 'Times New Roman', Times, serif;
 	color: white;
 }
-
+.back-button, .forward-button {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	height: 50px;
+	width: 5%;
+	padding-bottom: 10px;
+	float: left;
+	border-radius: 0;
+	border: 0;
+	clip-path: polygon(40% 0%, 40% 30%, 100% 30%, 100% 70%, 40% 70%, 40% 100%, 0% 50%);
+}
+.forward-button {
+	float: right;
+	clip-path: polygon(0 30%, 60% 30%, 60% 0%, 100% 50%, 60% 100%, 60% 70%, 0 70%);
+}
 .content {
 	width: 100%;
 	height: 100%;
@@ -66,6 +79,8 @@ button {
 }
 button:hover:disabled {
 	background: red;
+	box-shadow: none;
+	border-radius: none;
 }
 
 button:hover:enabled {

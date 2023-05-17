@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RegistrationComponent } from './modules/registration/registration.component';
 import { LoginComponent } from './modules/login/login.component';
-import { MainPageComponent } from './modules/main-page/main-page.component';
+import { MainComponent } from './modules/main/main.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
@@ -13,14 +13,16 @@ import { HttpErrorHandlerInterceptor } from './core/interceptors/http-error-hand
 import { GlobalErrorHandler } from './core/services/global-error-handler.service';
 import { MessageModalComponent } from './shared/components/modals/message-modal/message-modal.component';
 import { IconsModule } from './shared/icons/icons.module';
+import { CharCreationComponent } from './modules/character-creation/char-creation.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegistrationComponent,
     LoginComponent,
-    MainPageComponent,
+    MainComponent,
     MessageModalComponent,
+    CharCreationComponent
   ],
   imports: [
     HttpClientModule,

@@ -19,6 +19,13 @@ export class RegistrationComponent {
     private location: Location,
     private http: HttpClient
   ) { }
+  //adding check if username or emails exist
+  userExists: boolean = false;
+  emailExists: boolean = false;
+  //bools for the icons
+  userLoading: boolean = false;
+  emailLoading: boolean = false;
+
   ngOnInit() {
     this.registrationForm.controls['name'].valueChanges.pipe(debounceTime(1000))
       .subscribe(username => {
@@ -34,7 +41,7 @@ export class RegistrationComponent {
               this.registrationForm.controls['name'].setErrors({ 'incorrect': true })
               this.userExists = true
             }
-            else{ this.userExists = false}
+            else { this.userExists = false}
           })
         }
       )
@@ -52,27 +59,20 @@ export class RegistrationComponent {
               this.emailExists = true
             }
             else { this.emailExists = false }
-
           })
       }
     ) 
   }
-  //adding check if username or emails exist
-  userExists: boolean = false;
-  emailExists: boolean = false;
-  //bools for the icons
-  userLoading: boolean = false;
-  emailLoading: boolean = false;
+
   registrationForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.pattern(/^([A-Za-zЁёА-яÖÄöä](')?(_)?(-)?){3,25}$/)]),
     email: new FormControl('', [Validators.maxLength(255), Validators.required, Validators.pattern(/^[\w-\.]+@([\w -]+\.)+[\w-]{2,4}$/)]),
     password: new FormControl('', [Validators.required, Validators.pattern(/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,64}/)]),
   })
+
   emailCode = new FormControl('', [Validators.required, Validators.pattern(/^[0-9]{6}$/)])
   get regForm() { return this.registrationForm.controls }
   get confirmCode() { return this.emailCode }
-
-
 
   goBack() {
     this.location.back();
@@ -82,7 +82,6 @@ export class RegistrationComponent {
   registered: boolean = false;
   registration() {
     this.registerLoading = true;
-
     this.registrationForm.setErrors({invalid: 'true'})
     console.log("submitting stuff")
     this.http.post("https://localhost:7017/users", this.registrationForm.value, {observe : 'response'}).pipe(

@@ -1,4 +1,5 @@
 /* show errors to the user through a message*/
+import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -16,18 +17,19 @@ export class ErrorMessageService {
 		this._msgs.push(error)
 	}
 	//give an according error response for the user
-	checkError(status: number, msg: string) : string {
-		if(status == null) { return msg }
-		if(status >= 400 && status < 500) {
-			status === 404 ? this._msg = "Nothing was found/Wrong link!" :
-											this._msg = "Bad input, please check it and try again!"
+	checkError(errorResp : HttpErrorResponse) {
+		if (errorResp == null) {
+			this._msg = "Unexpected error, please refresh and try again!"
 		}
-		else if(status >= 500) {
+		if (errorResp.status >= 400 && errorResp.status < 500) {
+			errorResp.status === 404 ? this._msg = "Nothing was found/Wrong link!" :
+											this._msg = errorResp.error
+		}
+		else if (errorResp.status >= 500) {
 			this._msg = "Connection to the server can't be established, please try again later!"
 		}
 		else {
 			this._msg = "Unexpected error, please refresh and try again!" 
 		}
-		return this._msg
 	}
 }

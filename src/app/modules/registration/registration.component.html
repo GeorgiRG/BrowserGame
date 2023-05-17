@@ -45,9 +45,9 @@
 					uppercase and one lowercase letter!
 				</div>
 				<br>
-				<button type="button" (click)="goBack()" class="registration-back-button">
+				<button type="button" (click)="goBack()" class="back-button"></button>
+
 	
-				</button>
 				<button [disabled]="!this.registrationForm.valid" [hidden]="registered"
 					class="registration-confirm-button" type="submit">Register
 					 <icon-loading *ngIf="registerLoading"></icon-loading>

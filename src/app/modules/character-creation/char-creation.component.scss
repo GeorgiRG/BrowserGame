@@ -1,0 +1,109 @@
+p {
+	font-weight: bold;
+}
+*{
+	min-height: 0;
+}
+h5{
+	font-size: 20px;
+	width: 20%;
+	color: white;
+	text-shadow: 0px 0px 10px cyan;
+	text-align: center;
+}
+.summary {
+	text-align: center;
+	position: fixed;
+	height: 5%;
+}
+.char-creation-panels {
+	height: fit-content;
+	min-height: 40%;
+	width: 80%;
+	padding: 30px;
+	border-radius: 15px;
+	background: linear-gradient(to bottom right, rgba(218, 69, 0, 0.877), rgba(58, 1, 34, 0.781) 70%);
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.panels{
+	margin-top: 15%;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+}
+.stats, .stat-headers{
+	width: 100%;
+	height: fit-content;
+	text-align: center;
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+}
+.stat-toggle {
+	width: 20%;
+	margin-left: 2%;
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+}
+.faction-choice, .faction-choice-clicked{
+	width: 25%;
+	margin-left: 6%;
+	text-align: center;	
+	border-radius: 10px;
+}
+.faction-choice-clicked{
+	box-shadow: 0 0 10px white;
+}
+.description {
+	display: flex;
+	padding: 10px;
+	flex-direction: row;
+	margin: 2%;
+	width: 90%;
+	background-color: rgba(0, 0, 0, 0.774);
+	animation: fadeIn 0.3s ease-in-out;
+}
+.details {
+	width: 70%;
+	text-align: center;
+}
+.details-species{
+	width: 100%;
+	text-align: center;
+}
+.example-pic {
+	margin-left: 5%;
+	width: 25%;
+	background-color: white;
+	text-align: center;
+	color: black;
+}
+
+.increase-btn, .decrease-btn {
+	margin: 10px;
+	border-radius: 0;
+}
+.decrease-btn {
+	clip-path: polygon(100% 0, 30% 50%, 100% 100%);
+}
+.increase-btn {
+clip-path: polygon(0 0, 70% 50%, 0 100%);
+}
+
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}

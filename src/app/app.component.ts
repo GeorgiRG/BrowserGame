@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ModalService } from './shared/services/modal.service';
+import { UserService } from './core/services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +10,7 @@ import { ModalService } from './shared/services/modal.service';
 export class AppComponent {
   title = 'BrowserGame';
   constructor(
-    protected modalSrvc : ModalService
+    protected modalSrvc : ModalService,
+    protected UserSrvc: UserService
   ){}
 }
