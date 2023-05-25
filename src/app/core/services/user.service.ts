@@ -4,13 +4,12 @@ import { User } from 'src/app/shared/interfaces/user.interface';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
-	private user: User = {
+	private userData: User = {
 		Id: 0,
 		Name: '',
-		Email: '',
 		Faction: '',
-		Race: '',
-		CharClass: '',
+		Species: '',
+		UserSkillsId: -1,
 		SessionId: '' 
 	};
 	constructor(
@@ -18,10 +17,10 @@ export class UserService {
 
 	updateValues(user: User) {
 		if (!user) throwError(() => new Error("User not provided in service"));
-		this.user = user
+		this.userData = user
 	}
 
-	giveValues(){
-		return this.user;
+	user(){
+		return this.userData;
 	}
 }

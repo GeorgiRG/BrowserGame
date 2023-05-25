@@ -1,0 +1,15 @@
+#nav-bar-left {
+	position: absolute;
+	float: left;
+	display: flex;
+	margin-top: 5%;
+	height: 75%;
+	width: 10%;
+	flex-direction: column;
+	z-index: 5;
+}
+button {
+	height: 15%;
+	width: 100%;
+	background-color: red;
+}

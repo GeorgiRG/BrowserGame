@@ -8,12 +8,14 @@ import {
 } from '@angular/common/http';
 import { Observable, retry, tap, catchError, of, throwError, timer, filter } from 'rxjs';
 import { ErrorMessageService } from '../services/error.message.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class HttpErrorHandlerInterceptor implements HttpInterceptor {
 
   constructor(
-    private msgSrvc: ErrorMessageService) {}
+    private msgSrvc: ErrorMessageService,
+    private router: Router) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     request = request.clone({
@@ -25,6 +27,9 @@ export class HttpErrorHandlerInterceptor implements HttpInterceptor {
         delay: (this.shouldRetry),
       }),
       catchError((error: HttpErrorResponse) : Observable<any> => {
+        if (error.status === 401) {
+          this.router.navigate(['login']);
+        }
         this.msgSrvc.checkError(error)
         return of()
       })

@@ -74,7 +74,7 @@
 			<br>
 			<div>
 				<label style="font-size: small;">Remember me</label>
-				<input style="transform: translate(-49%, 0);" #rememberMe
+				<input style="transform: translate(-49%, 0);" (change)="toggleRememberMe()"
 					type="checkbox">
 			</div>
 			<button [disabled]="!this.loginForm.valid" class="log-in-button"

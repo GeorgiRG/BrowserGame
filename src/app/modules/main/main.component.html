@@ -1,6 +1,196 @@
-<div class="main">
-	<a routerLink="/registration">Registration</a>
-	<h2>Test entry</h2>
-	<button class="registration-button"> registration</button>
-	<button class="login-button">another</button>
+<!DOCTYPE html>
+<html>
+<div class="content" id="content">
+	<app-nav-bar></app-nav-bar>
+	<div class="colony">
+		<div class="top-menu" >
+			<button class="top-menu-btn" (click)="this.planetPage=1">Overview</button>
+			<button class="top-menu-btn" (click)="this.planetPage=2">Buildings</button>
+			<button class="top-menu-btn" (click)="this.planetPage=3">Population</button>
+			<button class="top-menu-btn" (click)="this.planetPage=4">Production</button>
+			<button class="top-menu-btn" (click)="this.planetPage=5">Defences</button>
+		</div>
+		 
+		<div *ngIf="this.planetPage == 0" class="planet-details">
+			<p>Planet name: Test</p>
+			<p>Faction: Unaffiliated</p>
+			<p>Size: 100</p>
+			<p>Resources: 5 resource icons</p>
+			<p>Atmosphere: No</p>
+			<p>Avg. Temperature: -45C</p>
+		</div>		
+		<div *ngIf="this.planetPage == 0" class="planet"></div>
+		<h4 *ngIf="this.planetPage>1">Energy: 5 Building Res: 5 Stuff: 5 Stuff: 5
+			Stuff: 5</h4>
+
+		<!--Overview-->
+		<div *ngIf="this.planetPage==1" class="tab-details">
+			<div id="gov-details">
+				<div id="gov-pic">Profile pic</div>
+				<h2>Governor Name</h2>
+				<p>Space warfare: Number</p>
+				<p>Land warfare: Number</p>
+				<p>Research: Number</p>
+				<p>Engineering: Number</p>
+				<p>Economy: Number</p>
+			</div>
+			<div id="pop">
+				<h2>Population</h2>
+				<p>Total : Number</p>
+				<p>Species 1 : Number</p>
+				<p>Species 2 : Number</p>
+				<p>Species 3 : Number</p>
+				<p>Species 4 : Number</p>
+				<p>Species 5 : Number</p>
+			</div>
+			<div id="exports">
+				<h3>Exports: Worth 444€</h3>
+				<p>Goods 1: Number</p>
+				<p>Goods 2: Number</p>
+				<p>Goods 3: Number</p>
+				<p>Goods 4: Number</p>
+				<p>Goods 5: Number</p>
+			</div>
+			<div id="imports">
+				<h3>Imports: Worth 111€</h3>
+				<p>Goods 1: Number</p>
+				<p>Goods 2: Number</p>
+				<p>Goods 3: Number</p>
+				<p>Goods 4: Number</p>
+				<p>Goods 5: Number</p>
+			</div>
+			<div>
+				<h3>Economy Stuff</h3>
+				<p>Budget: 333$</p>
+			</div>
+		</div>
+		<!--Bulding tab-->
+		<div *ngIf="this.planetPage==2" class="tab-details" id="buildings">
+			<div id="building-menu">
+				<icon-close [inputId]="'building-menu'"></icon-close>
+				<div class="building" >
+					<div class="building-icon">Building Icon</div>
+					<div class="building-details">
+						<h5>Building name</h5>
+						<p>Resource demands: Energy 10</p>
+							<p>Produces: Stuff</p>
+							<p>Construction cost: 1000materials 500metal 100electronics</p>
+							<p>Construction time: 22mins</p>
+							<br>
+						</div>
+				</div>
+				<div class="building">
+					<div class="building-icon">Building Icon</div>
+					<div class="building-details">
+						<h5>Building name</h5>
+						<p>Resource demands: Energy 10</p>
+						<p>Produces: Stuff</p>
+						<p>Construction cost: 1000materials 500metal 100electronics</p>
+						<p>Construction time: 22mins</p>
+						<br>
+					</div>
+				</div>
+				<div class="building">
+					<div class="building-icon">Building Icon</div>
+					<div class="building-details">
+						<h5>Building name</h5>
+						<p>Resource demands: Energy 10</p>
+						<p>Produces: Stuff</p>
+						<p>Construction cost: 1000materials 500metal 100electronics</p>
+						<p>Construction time: 22mins</p>
+						<br>
+					</div>
+				</div>
+				<div class="building">
+					<div class="building-icon">Building Icon</div>
+					<div class="building-details">
+						<h5>Building name</h5>
+						<p>Resource demands: Energy 10</p>
+						<p>Produces: Stuff</p>
+						<p>Construction cost: 1000materials 500metal 100electronics</p>
+						<p>Construction time: 22mins</p>
+						<br>
+					</div>
+				</div>
+				<div class="building">
+					<div class="building-icon">Building Icon</div>
+					<div class="building-details">
+						<h5>Building name</h5>
+						<p>Resource demands: Energy 10</p>
+						<p>Produces: Stuff</p>
+						<p>Construction cost: 1000materials 500metal 100electronics</p>
+						<p>Construction time: 22mins</p>
+						<br>
+					</div>
+				</div>
+			</div>
+			<button *ngFor="let item of this.planetSlots; let i = index;"
+				(click)="openMenu('building-menu', i)"
+				class="building-slot"><icon-plus *ngIf="item != 1"></icon-plus>
+			</button>
+		</div>
+		<!--Pop tab-->
+		<div *ngIf="this.planetPage==3" class="tab-details" id="populationTab" >
+			<h4 style="width: 50%;">Total Population: 50 000 000 000</h4>
+			<h4 style="width: 50%;">Population loyalty: 100 <br> Loyalty change: -0.3/h</h4>
+			<div class="popPie">
+				<canvas baseChart [type]="'pie'" [datasets]="popPieDatasets"
+					[labels]="popPieLabels" [options]="popPieOptions" [legend]="true">
+				</canvas>
+			</div>
+			<div style="flex-direction: row;width: 47%;margin-left: 3%;">
+				<dropdown [placeholder]="'Choose species type to be trained'" 
+					[options]="this.popPieLabels" (dropdownValue)="check($event)" 
+					[contentId]="'speciesType'">
+				</dropdown>
+				<br>
+				<h4>Amount to create a team is determined by the species stats</h4>
+				<div class="popCost" >Train research team (Cost)<br>Free facilities AMOUNT</div>
+				<button class="plusButton" (click)="train()"></button>
+				<div class="popCost" >Train production team (Cost)<br>Free facilities AMOUNT</div>
+				<button class="plusButton" (click)="train()"></button>
+				<div class="popCost" >Train economy team (Cost)<br>Free facilities AMOUNT</div>
+				<button class="plusButton" (click)="train()"></button>
+				<div class="popCost" >Train military team (Cost)<br>Free facilities AMOUNT</div>
+				<button disabled class="plusButton" (click)="train()"></button>
+			</div>
+			<div id="trainingTimes"></div>
+		</div>
+		<!--Production tab-->
+		<div *ngIf="this.planetPage==4" class="tab-details" id="productionTab">
+			<h3 style="width: 50%;">Total Population: 50 000 000 000</h3>
+
+			<div class="popPie">
+				<canvas baseChart [type]="'pie'" [datasets]="popPieDatasets"
+					[labels]="popPieLabels" [options]="popPieOptions" [legend]="true">
+				</canvas>
+			</div>
+			<div style="flex-direction: row;width: 47%;margin-left: 3%;">
+				<dropdown [placeholder]="'Choose species type to be trained'"
+					[options]="this.popPieLabels" (dropdownValue)="check($event)"
+					[contentId]="'speciesType'">
+				</dropdown>
+				<br>
+				<h4>Amount to create a team is determined by the species stats</h4>
+				<div class="popCost">Train research team (Cost)<br>Free facilities AMOUNT
+				</div>
+				<button class="plusButton" (click)="train()"></button>
+				<div class="popCost">Train production team (Cost)<br>Free facilities AMOUNT
+				</div>
+				<button class="plusButton" (click)="train()"></button>
+				<div class="popCost">Train economy team (Cost)<br>Free facilities AMOUNT
+				</div>
+				<button class="plusButton" (click)="train()"></button>
+				<div class="popCost">Train military team (Cost)<br>Free facilities AMOUNT
+				</div>
+				<button disabled class="plusButton" (click)="train()"></button>
+			</div>
+			<div id="trainingTimes"></div>
+		</div>
+
+
+	</div>
+
+
 </div>
+</html>

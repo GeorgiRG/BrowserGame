@@ -8,6 +8,8 @@ import { HttpClient } from '@angular/common/http';
 import { of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { UserService } from 'src/app/core/services/user.service';
+import { UserSkills } from 'src/app/shared/interfaces/user-skills.interface';
+import { User } from 'src/app/shared/interfaces/user.interface';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +28,7 @@ export class CharCreationComponent {
   selectedFaction: string = '';
   species : Array<string> = ["Aquatics", "Humans", "Insects", "Liths", "Robots", "Parasites"];
   selectedSpecies: string = '';
-  availablePower: number = 15; 
+  availablePower: number = 10; 
   //not putting these in array so there is more clarity
   //a lot more typing but safer?
   spaceWarfare: number = 5;
@@ -43,7 +45,7 @@ export class CharCreationComponent {
       || this.availablePower != 0
       || (this.selectedFaction != "Unaffiliated" && (this.selectedSpecies == "Robots" || this.selectedSpecies == "Parasites"))
       //all stats + available points
-      || this.spaceWarfare + this.landWarfare + this.research + this.engineering + this.economy != 40) 
+      || this.spaceWarfare + this.landWarfare + this.research + this.engineering + this.economy != 35) 
       { 
         this.canSubmit = false;
     }
@@ -90,5 +92,46 @@ export class CharCreationComponent {
         break
     }
     this.availablePower -= 1;
+  }
+  updateCharacter() {
+    this.http.put(`https://localhost:7017/users?faction=${this.selectedFaction}&species=${this.selectedSpecies}`,{}, { observe: 'response' }).pipe(
+      catchError((error) => {
+        console.log(error.message);
+        return of(false);
+      })
+    ).subscribe(
+      (data: any) => {
+        if (data && data.status == 200) {
+          //this.router.navigate([''])
+          console.log('HTTP response', data.body);
+          this.userSrvc.updateValues(data.body);
+          this.levelUp();
+        }
+      })
+  }
+
+  levelUp(){
+    const skills: UserSkills = {
+      Level: 0,
+      Experience: 0,
+      SpaceWarfare: this.spaceWarfare,
+      LandWarfare: this.landWarfare,
+      Research: this.research,
+      Engineering: this.engineering,
+      Economy: this.economy,
+      Fame: 0
+    };
+    this.http.put(`https://localhost:7017/users/levelUp`, skills, { observe: 'response' }).pipe(
+      catchError((error) => {
+        console.log(error.message);
+        return of(false);
+      })
+    ).subscribe(
+      (data: any) => {
+        if (data && data.status == 200) {
+          //this.router.navigate([''])
+          console.log('HTTP response', data.body);
+        }
+      })
   }
 }

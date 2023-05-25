@@ -3,13 +3,17 @@ import { CommonModule } from '@angular/common';
 import { IconCheckmarkComponent } from './basic/icon-checkmark.component';
 import { IconEyeComponent } from './basic/icon-eye.component';
 import { IconLoadingComponent } from './animated/icon-loading.component';
+import { IconPlusComponent } from './basic/icon-plus.component';
+import { IconCloseComponent } from './basic/icon-close.component';
 
 
 @NgModule({
   declarations: [
     IconCheckmarkComponent,
     IconEyeComponent,
-    IconLoadingComponent
+    IconLoadingComponent,
+    IconPlusComponent,
+    IconCloseComponent
 
   ],
   imports: [
@@ -18,7 +22,10 @@ import { IconLoadingComponent } from './animated/icon-loading.component';
   exports: [
     IconCheckmarkComponent,
     IconEyeComponent,
-    IconLoadingComponent
+    IconLoadingComponent,
+    IconPlusComponent,
+    IconCloseComponent
+
   ]
 })
 export class IconsModule { }
