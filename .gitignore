@@ -44,4 +44,5 @@ Thumbs.db
 
 #own
 game.txt
-/src/assets
+*.jpg
+*.jpeg

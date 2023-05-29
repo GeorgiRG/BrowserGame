@@ -14,7 +14,7 @@
 					</icon-checkmark>
 					<div *ngIf="!userExists" [hidden]="regForm.name.valid || regForm.name.pristine"
 						class="alert-error">
-						Username has to be 3-25 charecters long and have only letters or _ ' - (one of each between letters)
+						Username has to be 3-25 charecters long, start with letters and not have special symbols (except _ or -) 
 					</div>
 					<div *ngIf="userExists" class="alert-error">Username is taken</div>
 				<input (keyup)="emailLoading=true"

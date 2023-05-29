@@ -65,7 +65,8 @@ export class RegistrationComponent {
   }
 
   registrationForm = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.pattern(/^([A-Za-zЁёА-яÖÄöä](')?(_)?(-)?){3,25}$/)]),
+    //regex explanations on the html
+    name: new FormControl('', [Validators.required, Validators.pattern(/^[^<>[\]{\}|\\\/^~')(`=@!¤€"'.%# :;,$%?\0-\cZ](?=.{1}[A-Za-z])[A-Za-z_-\d]{1,25}$/)]),
     email: new FormControl('', [Validators.maxLength(255), Validators.required, Validators.pattern(/^[\w-\.]+@([\w -]+\.)+[\w-]{2,4}$/)]),
     password: new FormControl('', [Validators.required, Validators.pattern(/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,64}/)]),
   })
