@@ -158,13 +158,10 @@
 		</div>
 		<!--Production tab-->
 		<div *ngIf="this.planetPage==4" class="tab-details" id="productionTab">
-			<h3 style="width: 50%;">Total Population: 50 000 000 000</h3>
+			<h3 style="width: 50%;">Producing</h3>
+			<h3 style="width: 50%;">Resource Demands</h3>
 
-			<div class="popPie">
-				<canvas baseChart [type]="'pie'" [datasets]="popPieDatasets"
-					[labels]="popPieLabels" [options]="popPieOptions" [legend]="true">
-				</canvas>
-			</div>
+			
 			<div style="flex-direction: row;width: 47%;margin-left: 3%;">
 				<dropdown [placeholder]="'Choose species type to be trained'"
 					[options]="this.popPieLabels" (dropdownValue)="check($event)"
