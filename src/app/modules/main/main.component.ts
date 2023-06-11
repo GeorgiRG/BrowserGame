@@ -2,7 +2,7 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ChartOptions } from 'chart.js';
+import { Chart, ChartOptions } from 'chart.js';
 import { catchError, of } from 'rxjs';
 import { UserService } from 'src/app/core/services/user.service';
 import { User } from 'src/app/shared/interfaces/user.interface';
@@ -21,6 +21,7 @@ export class MainComponent {
     this.sessionLogin();
 
   }
+
   planetPage: number = 0;
   planetSlots: Array<number> = [1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
   buildingMenu: boolean = false;
@@ -69,6 +70,8 @@ export class MainComponent {
     this.speciesTeam = event;
   }
   train(){
+    this.popPieDatasets[0].data[0] = this.popPieDatasets[0].data[0] + 100
+    
     let teamTrained = document.createElement('div')
     teamTrained.style.width = "100%";
     teamTrained.textContent = "Training whatever team (Amount dedicated) Time Left - 55:55"

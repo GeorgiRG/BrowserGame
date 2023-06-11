@@ -33,7 +33,6 @@ export class ProductionService {
 		private http: HttpClient,
 		private msgSrvc: ModalService,
 	) {	
-		console.log(this.updateProduction('Guns', 350, 90));
 	}
 
 	collectProductionValues(productionId: number): ProductionValues{
@@ -65,15 +64,7 @@ export class ProductionService {
 
 	//
 	updateProduction(resource: string, workers: number, factories: number): Object {
-		//let res: Resource | number = this.currentlyViewedProdValue[resource as keyof ProductionValues];
-		let res : Resource = {
-			Storage : 100,
-			GainPerHour: 3,
-			Efficiency: 30,
-			Factories: 3,
-			Workers: 3
-			
-		}
+		let res: Resource | number = this.currentlyViewedProdValue[resource as keyof ProductionValues];
 		if(typeof res != 'number') {
 			let prod = this.factoryProduction(workers, factories);
 			res.GainPerHour = prod.production;
@@ -81,7 +72,6 @@ export class ProductionService {
 			res.Factories = factories;
 			res.Workers = workers;
 		}
-		console.log(res);
 		let costs: any = this.reqiredResources[resource as keyof typeof this.reqiredResources]
 		for (const key of Object.keys(costs)) {
 			costs[key as keyof typeof costs] = costs[key as keyof typeof costs] * workers;;
@@ -91,7 +81,8 @@ export class ProductionService {
 	factoryProduction(workers: number, factories: number) : {efficiency: number, production: number}  {
 		//with this more and more factories on one resource will get increasingly better
 		//downside of it is that it will require min 1worker per factory to produce anything
-		//
+		//and higher cost for more factories, specializing would also require dragging
+		//resources across planets, which has a risk of them being lost
 		const scalingRatio = Math.round(workers * (workers /( 35 * factories * 1.5)));
 		//in percent
 		let efficiency = Math.round(Math.log(workers - factories + 1) / Math.log(2)) * 15 - scalingRatio;

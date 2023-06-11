@@ -16,6 +16,7 @@ import { IconsModule } from './shared/icons/icons.module';
 import { CharCreationComponent } from './modules/character-creation/char-creation.component';
 import { NavBarComponent } from './modules/nav-bar/nav-bar.component';
 import { DropdownComponent } from './shared/UIcomponents/general/dropdown';
+import { GalaxyMapComponent } from './modules/galaxy-map/galaxy-map.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { DropdownComponent } from './shared/UIcomponents/general/dropdown';
     MessageModalComponent,
     CharCreationComponent,
     NavBarComponent,
-    DropdownComponent
+    DropdownComponent,
+    GalaxyMapComponent
   ],
   imports: [
     HttpClientModule,
