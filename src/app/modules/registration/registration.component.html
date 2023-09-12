@@ -58,7 +58,7 @@
 				<input [formControl]="emailCode"
 				  [style]="{'background-color': (confirmCode.valid || confirmCode.pristine) ? 'white' : 'rgb(247, 210, 210)'}"
 					type="text" placeholder="123456" id="code">
-				<button id="btn-left"> Skip confirmation</button>
+				<button id="btn-left" (click)="this.goToCharacterCreation()"> Skip confirmation</button>
 				<button id="btn-right"[disabled]="!confirmCode.valid">Confirm email</button> 
 			</form>
 		</div>

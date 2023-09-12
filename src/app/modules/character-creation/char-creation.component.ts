@@ -105,6 +105,7 @@ export class CharCreationComponent {
           //this.router.navigate([''])
           console.log('HTTP response', data.body);
           this.userSrvc.updateValues(data.body);
+          console.log(this.userSrvc.user)
           this.levelUp();
         }
       })
@@ -112,14 +113,14 @@ export class CharCreationComponent {
 
   levelUp(){
     const skills: UserSkills = {
-      Level: 0,
-      Experience: 0,
-      SpaceWarfare: this.spaceWarfare,
-      LandWarfare: this.landWarfare,
-      Research: this.research,
-      Engineering: this.engineering,
-      Economy: this.economy,
-      Fame: 0
+      level: 0,
+      experience: 0,
+      spaceWarfare: this.spaceWarfare,
+      landWarfare: this.landWarfare,
+      research: this.research,
+      engineering: this.engineering,
+      economy: this.economy,
+      fame: 0
     };
     this.http.put(`https://localhost:7017/users/levelUp`, skills, { observe: 'response' }).pipe(
       catchError((error) => {

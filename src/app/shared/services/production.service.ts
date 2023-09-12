@@ -53,7 +53,7 @@ export class ProductionService {
 	//if not stored in memory, collect it from backend
 	getPlanetProduction(productionId: number): ProductionValues {
 		for(let i = 0; i < this.productionValues.length; i++){
-			if(this.productionValues[i].ProductionId == productionId){
+			if(this.productionValues[i].productionId == productionId){
 				this.currentlyViewedProdValue = this.productionValues[i];
 				return this.currentlyViewedProdValue;
 			}
@@ -67,10 +67,10 @@ export class ProductionService {
 		let res: Resource | number = this.currentlyViewedProdValue[resource as keyof ProductionValues];
 		if(typeof res != 'number') {
 			let prod = this.factoryProduction(workers, factories);
-			res.GainPerHour = prod.production;
-			res.Efficiency = prod.efficiency;
-			res.Factories = factories;
-			res.Workers = workers;
+			res.gainPerHour = prod.production;
+			res.efficiency = prod.efficiency;
+			res.factories = factories;
+			res.workers = workers;
 		}
 		let costs: any = this.reqiredResources[resource as keyof typeof this.reqiredResources]
 		for (const key of Object.keys(costs)) {

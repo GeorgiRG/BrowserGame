@@ -1,0 +1,126 @@
+#map {
+	height: 75%;
+	width: 80%;
+	background-repeat: round;
+	position: absolute;
+	background-color: black;
+	top: 20%;
+	left: 10%;
+	overflow: hidden;
+}
+#navigation{
+	background-color: black;
+	display: flex;
+	flex-direction: row;
+	position: absolute;
+	height: 15%;
+	width: 80%;
+	left: 10%;
+	top: 10%;
+}
+input, #coordinate-btn{
+	padding: 0;
+	text-align: center;
+	flex-grow: 0;
+	width: 5%;
+	height: 40%;
+	margin-top: 1%;
+	margin-left: 10px;
+}
+
+#map:active {
+	cursor: not-allowed;
+}
+h4 {
+	position: absolute;
+	margin-left: 30px;
+	margin-top: -40px;
+}
+.star-systems {
+	border-radius: 20px;
+	background: url("/assets/space2.jpg");
+	height: 3000px;	
+	width: 3000px;
+	position: absolute;
+	display: grid;
+	grid-template-columns: 	300px 300px 300px 300px 300px 300px 300px 300px 300px 300px;
+	top: 0;
+	left: 0;
+	transform-origin: top left;
+}
+.star-systems:active {
+	cursor: all-scroll;
+}
+.star-system {
+	height: 300px;
+	width: 300px;
+	text-align: center;
+	transition: ease-in-out 0.1s;
+}
+
+.cropped-image {
+	pointer-events: none;
+	margin-top: 100px;
+	height: 100px;
+	width: 100px;
+	border-radius: 50%;
+}
+
+.details{
+	background: rgba(255, 23, 23, 0);
+}
+.star-system:hover {
+	transform: scale(0.9, 0.9);
+	box-shadow: 1px 1px 20px white;
+}
+
+.star-system:hover .tooltip {
+	display: block;
+}
+.star-system {
+	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-drag: none;
+	-webkit-user-select: none;
+}
+.map-btn{
+	position: absolute;
+	z-index: 3;
+	margin: 0;
+
+	max-width: none;
+	min-width: none;
+}
+#map-btn-left{
+	left: 0;
+	top: 50%;
+	width: 3vw;
+	height: 6vw;
+	transform: translate(0, -50%);
+	clip-path: polygon(50% 0, 0 50%, 50% 100%);
+}
+#map-btn-right{
+	right: 0;
+	top: 50%;
+	width: 3vw;
+	height: 6vw;
+	transform: translate(0, -50%);
+	clip-path: polygon(50% 0, 50% 100%, 100% 50%);
+}
+#map-btn-top{
+	left: 50%;
+	top: 0;
+	width: 6vw;
+	height: 3vw;
+	transform: translate(-50%, 0);
+	clip-path: polygon(50% 0, 0 50%, 100% 50%);
+}
+#map-btn-bottom{
+	bottom: 0;
+	width: 6vw;
+	height: 3vw;
+	left: 50%;
+	transform: translate(-50%, 0);
+	clip-path: polygon(50% 100%, 0 50%, 100% 50%);
+}
+

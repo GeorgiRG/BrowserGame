@@ -1,8 +1,8 @@
 export interface User {
-	Id: number,
-	Name: string,
-	Faction: string,
-	Species: string,
-	UserSkillsId: number,
-	SessionId: string 
+	id: number,
+	name: string,
+	faction: string,
+	species: string,
+	userSkillsId: number,
+	sessionId: string 
 }

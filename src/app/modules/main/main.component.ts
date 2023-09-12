@@ -38,7 +38,7 @@ export class MainComponent {
   }];
 
   sessionLogin() {
-    if(this.userSrvc.user().Id != 0) {
+    if(this.userSrvc.user().id != 0) {
       this.http.get<User>(`https://localhost:7017/login`)
         .subscribe((user) => {
           if (!user) {

@@ -15,8 +15,10 @@ import { MessageModalComponent } from './shared/UIcomponents/modals/message-moda
 import { IconsModule } from './shared/icons/icons.module';
 import { CharCreationComponent } from './modules/character-creation/char-creation.component';
 import { NavBarComponent } from './modules/nav-bar/nav-bar.component';
-import { DropdownComponent } from './shared/UIcomponents/general/dropdown';
+import { DropdownComponent } from './shared/UIcomponents/general/dropdown/dropdown';
+import { SectorMapComponent } from './modules/sector-map/sector-map.component';
 import { GalaxyMapComponent } from './modules/galaxy-map/galaxy-map.component';
+import { TooltipComponent } from './shared/UIcomponents/general/tooltip/tooltip';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { GalaxyMapComponent } from './modules/galaxy-map/galaxy-map.component';
     CharCreationComponent,
     NavBarComponent,
     DropdownComponent,
+    TooltipComponent,
+    SectorMapComponent,
     GalaxyMapComponent
   ],
   imports: [

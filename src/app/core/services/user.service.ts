@@ -5,12 +5,12 @@ import { User } from 'src/app/shared/interfaces/user.interface';
 @Injectable({ providedIn: 'root' })
 export class UserService {
 	private userData: User = {
-		Id: 0,
-		Name: '',
-		Faction: '',
-		Species: '',
-		UserSkillsId: -1,
-		SessionId: '' 
+		id: 0,
+		name: '',
+		faction: '',
+		species: '',
+		userSkillsId: -1,
+		sessionId: '' 
 	};
 	constructor(
 	) { }

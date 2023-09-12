@@ -1,19 +1,19 @@
 import { Resource } from "./resource.interface"
 
 export interface ProductionValues {
-	ProductionId: number,
-	RareMetals: Resource,
-	Metals: Resource,
-	Fuels: Resource,
-	Organics: Resource,
-	Batteries: Resource,
-	Explosives: Resource,
-	Electronics: Resource,
-	Armor: Resource,
-	Plastics: Resource,
-	Food: Resource,
-	Guns: Resource,
-	ShipParts: Resource,
-	ConstructionMaterials: Resource,
-	ResearchMaterials: Resource
+	productionId: number,
+	rareMetals: Resource,
+	metals: Resource,
+	fuels: Resource,
+	organics: Resource,
+	batteries: Resource,
+	explosives: Resource,
+	electronics: Resource,
+	armor: Resource,
+	plastics: Resource,
+	food: Resource,
+	guns: Resource,
+	shipParts: Resource,
+	constructionMaterials: Resource,
+	researchMaterials: Resource
 }

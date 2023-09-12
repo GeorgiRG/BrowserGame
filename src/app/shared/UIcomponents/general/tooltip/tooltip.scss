@@ -1,0 +1,12 @@
+.tooltip {
+	position: absolute;
+	width: fit-content;
+	height: fit-content;
+	padding: 20px;
+	margin: auto;
+	background-color: red;
+	text-align: left;
+	top: 5%;
+	left: 110%;
+	animation: fadeInRight 0.6s;
+}

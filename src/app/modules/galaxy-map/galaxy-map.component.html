@@ -1,17 +1,2 @@
-<!DOCTYPE html>
-<html>
-	<div id="map" >
-		<div class="star-systems" id="systemsPanner" 
-			(mouseleave)="this.panning = false" (mousemove)="this.moveView($event)"
-			(mouseup)="this.panning= false" (mousedown)="this.updatePannerMousePos($event)">
-			<div *ngFor="let star of this.starSystems" 
-			class="star-system">
-				<img class="cropped-image">
-				<h3>Name X:Y</h3>
-				<!--<div class="details"> Star Name: ASDF <br> Planets: 3/5 <br> Resources: 300</div>-->
-			</div>
-		</div>
-	</div>
-
-
-</html>
+<p>galaxy-map works!</p>
+	<button (click)="redirect(92)">To sector</button>

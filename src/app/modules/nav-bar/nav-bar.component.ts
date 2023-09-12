@@ -9,9 +9,10 @@ import { Router } from '@angular/router';
 export class NavBarComponent {
 
   constructor(
-    private router: Router
+    private router: Router,
   ) {}
   
+
   redirect(location: string) {
     this.router.navigate([location]);
   }

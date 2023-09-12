@@ -6,6 +6,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { HttpClient} from '@angular/common/http';
 import { ModalService } from 'src/app/shared/services/modal.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -17,7 +18,8 @@ export class RegistrationComponent {
   constructor(
     private msgSrvc : ModalService,
     private location: Location,
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) { }
   //adding check if username or emails exist
   userExists: boolean = false;
@@ -79,6 +81,9 @@ export class RegistrationComponent {
     this.location.back();
   }
 
+  goToCharacterCreation() {
+    this.router.navigate(['character-creation']);
+  }
   registerLoading: boolean = false;
   registered: boolean = false;
   registration() {

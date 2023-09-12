@@ -13,7 +13,7 @@ import { Component, Input, Output, EventEmitter, AfterViewInit } from '@angular/
 
 						
 							`,
-	styleUrls: ['./dropdown.styles.scss']
+	styleUrls: ['./dropdown.scss']
 })
 export class DropdownComponent {
 	@Input() contentId: string = '';
