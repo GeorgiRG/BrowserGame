@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<app-nav-bar></app-nav-bar>
+	<div id="navigation">
+		<button class="back-button" (click)="backToSector()"></button>
+		<h3 style="margin-left: 10px;" *ngIf="this.starSystem">
+			 Star System info- Name: {{this.starSystem.name}} Stuff: s....
+		</h3>
+
+	</div>
+	<div class="star-system">
+		<div *ngFor="let planet of planets; let i = index " class="planet" >
+			
+				<tooltip [planet]="planet" [position]="i"></tooltip>
+				<img style="border-radius: 50%;margin-top: 20px;" src="/assets/planet.jpg">
+
+
+			<!--<div class="details"> Star Name: ASDF <br> Planets: 3/5 <br> Resources: 300</div>-->
+		</div>
+	</div>
+</html>

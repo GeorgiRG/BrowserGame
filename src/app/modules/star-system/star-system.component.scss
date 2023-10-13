@@ -1,4 +1,4 @@
-.galaxy{
+.star-system {
 	height: fit-content;
 	flex-wrap: wrap;
 	left: 10%;
@@ -6,11 +6,9 @@
 	width: 80%;
 	position: absolute;
 	display: flex;
-	padding-bottom: 50px;
 	background: url("/assets/space2.jpg");
 	flex-direction: row;
 }
-
 #navigation {
 	background-color: black;
 	display: flex;
@@ -21,23 +19,17 @@
 	left: 10%;
 	top: 10%;
 }
-
-.sector {
-	background: no-repeat center/100% url("/assets/sector3.jpg") ;
-	color: rgb(207, 255, 76);
-	border-radius: 30%;
+.planet{
 	text-align: center;
-	width: 100px;
-	margin: 10px;
-	height: 100px;
+	width: 300px;
+	height: 300px;
 	transition: ease-in-out 0.1s;
 }
 
-.sector:hover {
+.planet:hover {
 	transform: scale(0.9, 0.9);
-	box-shadow: 1px 1px 5px white;
+	box-shadow: 1px 1px 20px white;
 }
-
-.sector:hover .tooltip {
+.planet:hover .tooltip {
 	visibility: visible;
 }

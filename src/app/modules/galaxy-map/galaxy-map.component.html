@@ -1,2 +1,23 @@
-<p>galaxy-map works!</p>
-	<button (click)="redirect(92)">To sector</button>
+<!DOCTYPE html>
+<html>
+<app-nav-bar></app-nav-bar>
+<div id="navigation">
+	<h3 style="margin-left: 10px;">
+		Galaxy Map <br>
+		Sector Statistics : stuff... 
+	</h3>
+
+</div>
+<div class="galaxy">
+	<div *ngFor="let sector of sectors; let i = index " class="sector" (click)="redirect(i + 1)">
+		<tooltip [sector]="sector" [position]=i></tooltip>
+
+		{{sector.gameId}} <br>
+	
+
+
+		<!--<div class="details"> Star Name: ASDF <br> Planets: 3/5 <br> Resources: 300</div>-->
+	</div>
+</div>
+
+</html>

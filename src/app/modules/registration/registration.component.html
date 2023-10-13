@@ -56,10 +56,15 @@
 			<form *ngIf="registered" action="">
 				<h3 id="success"> User successfuly created!<br>Please enter the email confirmation code!</h3>
 				<input [formControl]="emailCode"
-				  [style]="{'background-color': (confirmCode.valid || confirmCode.pristine) ? 'white' : 'rgb(247, 210, 210)'}"
+				  [style]="{'background-color': (confirmationCode.valid || confirmationCode.pristine) ? 'white' : 'rgb(247, 210, 210)'}"
 					type="text" placeholder="123456" id="code">
-				<button id="btn-left" (click)="this.goToCharacterCreation()"> Skip confirmation</button>
-				<button id="btn-right"[disabled]="!confirmCode.valid">Confirm email</button> 
+				<button 
+					id="btn-left" (click)="this.goToCharacterCreation()"> Skip confirmation
+				</button>
+				<button 
+					id="btn-right"[disabled]="!confirmationCode.valid" 
+					(click)="this.emailConfirmation()">Confirm email
+				</button> 
 			</form>
 		</div>
 	</div>

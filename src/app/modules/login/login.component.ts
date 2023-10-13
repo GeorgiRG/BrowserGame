@@ -8,6 +8,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { User } from 'src/app/shared/interfaces/user.interface';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -45,16 +46,22 @@ export class LoginComponent {
   login() {
     this.loginForm.setErrors({ invalid: 'true' })
     
-    this.http.post(`https://localhost:7017/login?rememberMe=${this.rememberMe}`, this.loginForm.value, { observe: 'response' }).pipe(
+    this.http.post<User>(`https://localhost:7017/login?rememberMe=${this.rememberMe}`, this.loginForm.value).pipe(
       catchError((error: Error) => {
         console.log(error.message)
-        return of(false)
+        return of(null)
       })
     ).subscribe(
-      (data: any) => {
-        if (data && data.status == 200) {
-          this.router.navigate([''])
-          console.log('HTTP response', data)
+      (user) => {
+        if (user != null) {
+          if(user.faction == null || user.species == null) {
+            this.router.navigate(['character-creation'])
+          }
+          else {
+            this.router.navigate([''])
+
+          }
+          console.log('HTTP response', user)
         }
       }
     )

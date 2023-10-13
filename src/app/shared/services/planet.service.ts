@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ProductionValues } from '../interfaces/production-values.interface';
 import { UserService } from 'src/app/core/services/user.service';
-import { Planet } from '../interfaces/planet.interface';
+import { PlanetBasicView } from '../interfaces/planetBasicView.interface';
 import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
@@ -10,7 +10,7 @@ import { ModalService } from './modal.service';
 @Injectable({ providedIn: 'root' })
 export class PlanetService {
 
-	planetValues : Planet = null!;
+	planetValues: PlanetBasicView = null!;
 	constructor(
 		private userSrvc: UserService,
 		private http: HttpClient,
@@ -21,7 +21,7 @@ export class PlanetService {
 	}
 
 	collectPlanetValues(){
-		this.http.get<Planet>(`https://localhost:7017/planet/`).pipe(
+		this.http.get<PlanetBasicView>(`https://localhost:7017/planet/`).pipe(
 			catchError((error: any) => {
 				return of(null);
 			})

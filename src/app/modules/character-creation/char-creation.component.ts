@@ -10,6 +10,7 @@ import { catchError } from 'rxjs/operators';
 import { UserService } from 'src/app/core/services/user.service';
 import { UserSkills } from 'src/app/shared/interfaces/user-skills.interface';
 import { User } from 'src/app/shared/interfaces/user.interface';
+import { Factions } from 'src/app/shared/enums/factions.enum';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +25,7 @@ export class CharCreationComponent {
      
   }
   page: number = 1
-  factions: Array<string>  = ["Vega", "Solar", "Azure", "Unaffiliated"];
+  factions: Array<string>  = Object.values(Factions);
   selectedFaction: string = '';
   species : Array<string> = ["Aquatics", "Humans", "Insects", "Liths", "Robots", "Parasites"];
   selectedSpecies: string = '';
@@ -38,6 +39,7 @@ export class CharCreationComponent {
   economy: number = 5;
 
   canSubmit: boolean = false;
+  //Move to tools
   checkInput() {
     this.page = 4;
     if (!this.factions.includes(this.selectedFaction) 
@@ -52,47 +54,28 @@ export class CharCreationComponent {
     else { this.canSubmit = true; }
   }
 
-  decrease(stat: number) {
+  adjust(stat: number, amount: number) {
     switch (stat) {
       case 1 : 
-        this.spaceWarfare--;
+        this.spaceWarfare += amount;
         break;
       case 2:
-        this.landWarfare--;
+        this.landWarfare += amount;
         break;
       case 3:
-        this.research--;
+        this.research += amount;
         break;
       case 4:
-        this.engineering--;
+        this.engineering += amount;
         break;
       case 5:
-        this.economy--;
+        this.economy += amount;
         break        
     }
-    this.availablePower += 1;
+    this.availablePower -= amount;
+    
   }
 
-  increase(stat: number) {
-    switch (stat) {
-      case 1:
-        this.spaceWarfare++;
-        break;
-      case 2:
-        this.landWarfare++;
-        break;
-      case 3:
-        this.research++;
-        break;
-      case 4:
-        this.engineering++;
-        break;
-      case 5:
-        this.economy++;
-        break
-    }
-    this.availablePower -= 1;
-  }
   updateCharacter() {
     this.http.put(`https://localhost:7017/users?faction=${this.selectedFaction}&species=${this.selectedSpecies}`,{}, { observe: 'response' }).pipe(
       catchError((error) => {

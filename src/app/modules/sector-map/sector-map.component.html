@@ -7,7 +7,7 @@
 		<button id="coordinate-btn" [disabled]="!this.destForm.destinationX.valid || !this.destForm.destinationY.valid" 
 			type="button" (click)="this.goToLocation()">Go to
 		</button>
-		<h3 style="margin-left: 30px ;">Sector 0</h3>
+		<h3 style="margin-left: 30px ;">Sector {{sectorId}}</h3>
 	</form>
 	<div id="map" >
 		<button class="map-btn" id="map-btn-left"></button>
@@ -18,11 +18,11 @@
 			(pointerleave)="this.panning = false" (pointermove)="this.moveView($event)"
 			(pointerup)="this.panning=false" (pointerdown)="this.updatePannerMousePos($event)">
 			<div *ngFor="let star of starSystems; let i = index " 
-				class="star-system" [style]="{'background-color': backgrounds[i]}">
-				<tooltip [starSystem]="star"></tooltip>
+				class="star-system" [style]="{'background-color': backgrounds[i]}" (click)="goToSystem(star.id)">
+				<tooltip [starSystem]="star" [position]=i></tooltip>
 				<h4 *ngIf="i % 5 == 0">Sieged</h4>
 				<h4 *ngIf="i % 4 == 0">Ongoing battle</h4>
-				<img src={{images[i]}} class="cropped-image">
+				<img src={{images[i]}} class="cropped-image" >
 				<h1 *ngIf="star.size > 10">Capital</h1>
 				<h3>
 					{{star.name}} <br> {{star.locationX}}: {{star.locationY}} 

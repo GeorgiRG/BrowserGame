@@ -34,7 +34,7 @@ export class MapService {
 				}))
 	}
 	getStarSystem(sectorId: number, starId: number){
-		 return this.http.get<StarSystem[]>(`https://localhost:7017/map/${sectorId}/star-system/${starId}`,
+		 return this.http.get<StarSystem>(`https://localhost:7017/map/${sectorId}/star-system/${starId}`,
 		 	{ observe: 'response' }).pipe(
 				switchMap(resp => {
 					return of(resp.body)

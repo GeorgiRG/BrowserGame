@@ -91,7 +91,7 @@
 				<div class="example-pic">Example of a Unaffiliated faction town</div>
 			</div>
 		<div id="buttons">
-			<button [disabled]="this.selectedFaction == ''"type="button" class="forward-button" (click)="this.page=2"></button>
+			<button [disabled]="this.selectedFaction == '' "type="button" class="forward-button" (click)="this.page=2"></button>
 		</div>
 	</div>
 	<!--Species
@@ -238,51 +238,51 @@
 		<div class="stats">
 				<div class="stat-toggle">
 					<button [disabled]="this.spaceWarfare == 5"
-						(click)="decrease(1)" class="decrease-btn">
+						(click)="adjust(1, -1)" class="decrease-btn">
 					</button>
 					<h5>{{this.spaceWarfare}}</h5>
 					<button [disabled]="this.spaceWarfare == 20 || this.availablePower == 0"
-						(click)="increase(1)" class="increase-btn">
+						(click)="adjust(1, 1)" class="increase-btn">
 					</button>
 				</div>
 				<div class="stat-toggle">
 					<button 
 						[disabled]="this.landWarfare == 5"
-						(click)="decrease(2)" 
+						(click)="adjust(2, -1)" 
 						class="decrease-btn">
 					</button>
 					<h5>{{this.landWarfare}}</h5>
 					<button 
 						[disabled]="this.landWarfare == 20 || this.availablePower == 0"
-						(click)="increase(2)" 
+						(click)="adjust(2, 1)" 
 						class="increase-btn">
 					</button>
 				</div>
 				<div class="stat-toggle">
 					<button [disabled]="this.research== 5"
-						(click)="decrease(3)" class="decrease-btn">
+						(click)="adjust(3, -1)" class="decrease-btn">
 					</button>
 					<h5>{{this.research}}</h5>
 					<button [disabled]="this.research == 20 || this.availablePower == 0"
-						(click)="increase(3)" class="increase-btn">
+						(click)="adjust(3, 1)" class="increase-btn">
 					</button>
 				</div>
 				<div class="stat-toggle">
 					<button [disabled]="this.engineering == 5"
-						(click)="decrease(4)" class="decrease-btn">
+						(click)="adjust(4, -1)" class="decrease-btn">
 					</button>
 					<h5>{{this.engineering}}</h5>
 					<button [disabled]="this.engineering == 20 || this.availablePower == 0"
-						(click)="increase(4)" class="increase-btn">
+						(click)="adjust(4, 1)" class="increase-btn">
 					</button>
 				</div>
 				<div class="stat-toggle">
 					<button [disabled]="this.economy == 5"
-						(click)="decrease(5)" class="decrease-btn">
+						(click)="adjust(5, -1)" class="decrease-btn">
 					</button>
 					<h5>{{this.economy}}</h5>
 					<button [disabled]="this.economy == 20 || this.availablePower == 0"
-						(click)="increase(5)" class="increase-btn">
+						(click)="adjust(5, 1)" class="increase-btn">
 					</button>
 				</div>
 		</div>

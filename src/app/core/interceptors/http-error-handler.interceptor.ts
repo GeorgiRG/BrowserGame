@@ -18,6 +18,7 @@ export class HttpErrorHandlerInterceptor implements HttpInterceptor {
     private router: Router) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+    console.log(request)
     request = request.clone({
       withCredentials: true
     });

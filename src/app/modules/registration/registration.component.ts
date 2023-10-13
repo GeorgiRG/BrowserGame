@@ -4,7 +4,7 @@ import { Subject, of } from 'rxjs';
 import { catchError, debounceTime, tap } from 'rxjs/operators';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { HttpClient} from '@angular/common/http';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { ModalService } from 'src/app/shared/services/modal.service';
 import { Router } from '@angular/router';
 
@@ -37,13 +37,15 @@ export class RegistrationComponent {
               return of(true)
             })
             ) //Response returns boolean
-          .subscribe(usernameExists => {
+          .subscribe(usernameIsValid=> {
             this.userLoading = false
-            if (usernameExists) {
-              this.registrationForm.controls['name'].setErrors({ 'incorrect': true })
-              this.userExists = true
+            if (usernameIsValid) {
+              this.userExists = false
             }
-            else { this.userExists = false}
+            else { 
+              this.registrationForm.controls['name'].setErrors({ 'incorrect': true })
+              this.userExists = true;
+            }
           })
         }
       )
@@ -54,13 +56,15 @@ export class RegistrationComponent {
             this.emailLoading == false;
             return of(true)
           }))
-          .subscribe(emailExists => {
+          .subscribe(emailIsValid => {
             this.emailLoading = false
-            if (emailExists) {
-              this.registrationForm.controls['email'].setErrors({ 'incorrect': true })
-              this.emailExists = true
+            if (emailIsValid) {
+              this.emailExists = false
             }
-            else { this.emailExists = false }
+            else { 
+              this.emailExists = true 
+              this.registrationForm.controls['email'].setErrors({ 'incorrect': true })
+            }
           })
       }
     ) 
@@ -75,7 +79,7 @@ export class RegistrationComponent {
 
   emailCode = new FormControl('', [Validators.required, Validators.pattern(/^[0-9]{6}$/)])
   get regForm() { return this.registrationForm.controls }
-  get confirmCode() { return this.emailCode }
+  get confirmationCode() { return this.emailCode }
 
   goBack() {
     this.location.back();
@@ -85,12 +89,11 @@ export class RegistrationComponent {
     this.router.navigate(['character-creation']);
   }
   registerLoading: boolean = false;
-  registered: boolean = false;
+  registered: boolean = true;
   registration() {
     this.registerLoading = true;
     this.registrationForm.setErrors({invalid: 'true'})
-    console.log("submitting stuff")
-    this.http.post("https://localhost:7017/users", this.registrationForm.value, {observe : 'response'}).pipe(
+    this.http.post("https://localhost:7017/users", this.registrationForm.value).pipe(
       catchError((error : Error) => {
         this.msgSrvc.showMsg("There were errors in user creation.\nReason: " + error.message)
         this.registerLoading = false;
@@ -101,6 +104,20 @@ export class RegistrationComponent {
         if(data !== false) { 
           this.registered = true;
           console.log('HTTP response', data.message, data)
+          this.goToCharacterCreation();
+        }
+      })
+  }
+  emailConfirmation(){
+
+    this.http.post(`https://localhost:7017/users/confirmEmail?confirmationCode=${this.emailCode.value}`, this.emailCode.value).pipe(
+      catchError(() => {
+        return of(false)
+      })
+    ).subscribe(
+      (data: any) => {
+        if (data) {
+          this.goToCharacterCreation();
         }
       })
   }

@@ -19,6 +19,7 @@ import { DropdownComponent } from './shared/UIcomponents/general/dropdown/dropdo
 import { SectorMapComponent } from './modules/sector-map/sector-map.component';
 import { GalaxyMapComponent } from './modules/galaxy-map/galaxy-map.component';
 import { TooltipComponent } from './shared/UIcomponents/general/tooltip/tooltip';
+import { StarSystemComponent } from './modules/star-system/star-system.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { TooltipComponent } from './shared/UIcomponents/general/tooltip/tooltip'
     DropdownComponent,
     TooltipComponent,
     SectorMapComponent,
-    GalaxyMapComponent
+    GalaxyMapComponent,
+    StarSystemComponent
   ],
   imports: [
     HttpClientModule,

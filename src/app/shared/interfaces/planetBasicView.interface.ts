@@ -1,16 +1,18 @@
-export interface Planet {
+export interface PlanetBasicView {
 	planetId: string,
 	name: string,
-	locationX: number,
-	locationY: number,
 	systemPos: number,
 	size: number,
+	surfaceTemp: number,
 	rareMetals: number,
 	metals: number,
 	fuels: number,
 	organics: number,
-	population: number,
-	ownerId: number,
+	owned: boolean,
+	botId: number | null,
+	userId: number | null,
+	ownerName: string | null,
+	ownerFaction: string | null,
 	gravity: number,
 	atmosphere: number
 }

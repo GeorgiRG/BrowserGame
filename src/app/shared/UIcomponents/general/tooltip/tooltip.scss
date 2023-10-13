@@ -4,9 +4,17 @@
 	height: fit-content;
 	padding: 20px;
 	margin: auto;
-	background-color: red;
+	background-color: black;
 	text-align: left;
-	top: 5%;
-	left: 110%;
+	top: -25%;
+	left: 130%;
 	animation: fadeInRight 0.6s;
+	z-index: 5;
+}
+
+.canvasTooltip{
+	min-height: 0;
+	min-width: 0;
+	max-width: 300px;
+	max-height: 300px;
 }

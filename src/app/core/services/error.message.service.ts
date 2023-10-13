@@ -32,6 +32,6 @@ export class ErrorMessageService {
 		else {
 			this._msg = "Unexpected error, please refresh and try again!" 
 		}
-		console.log(this._msg);
+		//console.log(this._msg);
 	}
 }

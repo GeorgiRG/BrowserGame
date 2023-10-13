@@ -6,11 +6,8 @@
 import { Component} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { StarSystem } from 'src/app/shared/interfaces/star-system.interface';
 import { MapService } from 'src/app/shared/services/map.service';
-import { Observable } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +18,6 @@ export class SectorMapComponent {
   activatedRoute: any;
   constructor(
     private router: Router,
-    private http: HttpClient,
     public route: ActivatedRoute,
     private mapSrvc: MapService
   ) {}
@@ -76,6 +72,11 @@ export class SectorMapComponent {
     })
   }
 
+  goToSystem(systemId: number){
+    console.log("clicks")
+    this.router.navigate([`/sector/${this.sectorId}/star-system/${systemId}`]);
+  }
+
   //max value to be determined later depending on final galaxy size
   destinationForm = new FormGroup({
     destinationX : new FormControl(0, [Validators.max(9), Validators.min(0), Validators.pattern(/[0-9]/)]),
@@ -90,7 +91,6 @@ export class SectorMapComponent {
     this.pannerTop = (-this.destinationForm.value.destinationY! - 0.5) * this.starSytemSize + this.mapSize!.height / 2
     let panner = document.getElementById("systemsPanner");
     panner!.style.transform = `translate(${this.pannerLeft}px, ${this.pannerTop}px) scale(${this.zoomAmount})`;
-
   }
 
   updateMapDimensions(){

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Chart } from 'chart.js';
 import { Sector } from 'src/app/shared/interfaces/sector.interface';
 import { MapService } from 'src/app/shared/services/map.service';
 

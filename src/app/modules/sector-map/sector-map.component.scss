@@ -57,7 +57,10 @@ h4 {
 	text-align: center;
 	transition: ease-in-out 0.1s;
 }
-
+.star-system:hover {
+	transform: scale(0.9, 0.9);
+	box-shadow: 1px 1px 20px white;
+}
 .cropped-image {
 	pointer-events: none;
 	margin-top: 100px;
@@ -69,14 +72,12 @@ h4 {
 .details{
 	background: rgba(255, 23, 23, 0);
 }
-.star-system:hover {
-	transform: scale(0.9, 0.9);
-	box-shadow: 1px 1px 20px white;
-}
+
 
 .star-system:hover .tooltip {
-	display: block;
+	visibility: visible;
 }
+
 .star-system {
 	user-select: none;
 	-moz-user-select: none;

@@ -1,3 +1,5 @@
+import { PlanetBasicView } from "./planetBasicView.interface";
+
 export interface StarSystem {
 	id : number,
 	name: string,
@@ -5,5 +7,7 @@ export interface StarSystem {
 	locationX: number,
 	locationY: number,
 	totalResources: number,
-	size: number
+	size: number,
+	freePlanets: number,
+	planets: Array<PlanetBasicView>
 }
