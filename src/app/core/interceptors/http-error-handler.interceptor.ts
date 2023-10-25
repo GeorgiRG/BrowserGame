@@ -18,7 +18,6 @@ export class HttpErrorHandlerInterceptor implements HttpInterceptor {
     private router: Router) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    console.log(request)
     request = request.clone({
       withCredentials: true
     });
@@ -41,7 +40,7 @@ export class HttpErrorHandlerInterceptor implements HttpInterceptor {
       return timer(delayCount * 1000)
     }
     else {
-      console.log("400 thrown\n", error)
+      console.log("400 thrown\n", error.error)
       return throwError(() => error);
     }
   }

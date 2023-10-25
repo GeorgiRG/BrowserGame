@@ -72,12 +72,21 @@ export class RegistrationComponent {
 
   registrationForm = new FormGroup({
     //regex explanations on the html
-    name: new FormControl('', [Validators.required, Validators.pattern(/^[^<>[\]{\}|\\\/^~')(`=@!¤€"'.%# :;,$%?\0-\cZ](?=.{1}[A-Za-z])[A-Za-z_-\d]{1,25}$/)]),
-    email: new FormControl('', [Validators.maxLength(255), Validators.required, Validators.pattern(/^[\w-\.]+@([\w -]+\.)+[\w-]{2,4}$/)]),
-    password: new FormControl('', [Validators.required, Validators.pattern(/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,64}/)]),
+    name: new FormControl('', [
+      Validators.required, 
+      Validators.pattern(/^[^<>[\]{\}|\\\/^~')(`=@!¤€"'.%# :;,$%?\0-\cZ](?=.{1}[A-Za-z])[A-Za-z_-\d]{1,25}$/)]),
+    email: new FormControl('', [
+      Validators.maxLength(255), 
+      Validators.required]),
+    //Validators.pattern(/^[\w-\.]+@([\w -]+\.)+[\w-]{2,4}$/)]), validation on backend  
+    password: new FormControl('', [
+      Validators.required, 
+      Validators.pattern(/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,64}/)]),
   })
 
-  emailCode = new FormControl('', [Validators.required, Validators.pattern(/^[0-9]{6}$/)])
+  emailCode = new FormControl('', [
+    Validators.required, 
+    Validators.pattern(/^[0-9]{6}$/)])
   get regForm() { return this.registrationForm.controls }
   get confirmationCode() { return this.emailCode }
 
@@ -89,27 +98,24 @@ export class RegistrationComponent {
     this.router.navigate(['character-creation']);
   }
   registerLoading: boolean = false;
-  registered: boolean = true;
+  registered: boolean = false;
   registration() {
     this.registerLoading = true;
     this.registrationForm.setErrors({invalid: 'true'})
-    this.http.post("https://localhost:7017/users", this.registrationForm.value).pipe(
+    this.http.post("https://localhost:7017/users", this.registrationForm.value, {'observe':'response'}).pipe(
       catchError((error : Error) => {
         this.msgSrvc.showMsg("There were errors in user creation.\nReason: " + error.message)
         this.registerLoading = false;
         return of(false)
       })
-    ).subscribe(
-      (data : any)  => {
+    ).subscribe((data : any) => {
         if(data !== false) { 
           this.registered = true;
-          console.log('HTTP response', data.message, data)
-          this.goToCharacterCreation();
         }
       })
   }
-  emailConfirmation(){
 
+  emailConfirmation(){
     this.http.post(`https://localhost:7017/users/confirmEmail?confirmationCode=${this.emailCode.value}`, this.emailCode.value).pipe(
       catchError(() => {
         return of(false)

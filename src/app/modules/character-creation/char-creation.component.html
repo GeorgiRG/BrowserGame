@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
 <div class="content" id="content">
-	<!--Faction
-			selection-->
+	<!--Faction selection-->
 	<div *ngIf="this.page==1" class="char-creation-panels">
 		<div class="summary">
 			<h2 style="height: fit-content;">Select your faction MOVE LEFT</h2>
@@ -18,199 +17,68 @@
 			</h3>
 		</div>
 		<div class="panels" >
-			<div (click)="this.selectedFaction = 'Vega'"
-				[style]="{'box-shadow': this.selectedFaction == 'Vega' ? '0 0 20px white' : 'none'}"
-				class="faction-choice" style="background-color: var(--green);">
-				<h3>Legion of Vega</h3>
+			<div *ngFor="let faction of gameFactions; let i = index" class="faction-choice" 
+				(click)="this.factionIndex = i"
+				[style]="{'background-color': faction.color,
+					'box-shadow': this.factionIndex == i ? '0 0 20px white' : 'none'}">
+				<h3>{{faction.name}}</h3>
 				<h4 style="background: black;">Faction Icon</h4>
 			</div>
-			<div (click)="this.selectedFaction = 'Solar'"
-				[style]="{'box-shadow': this.selectedFaction == 'Solar' ? '0 0 20px white' : 'none'}"
-				class="faction-choice" style="background-color: var(--red);">
-				<h3>Solar Empire</h3>
-				<h4 style="background: black;" >Faction Icon</h4>
-			</div>
-			<div (click)="this.selectedFaction = 'Azure'"
-				[style]="{'box-shadow': this.selectedFaction == 'Azure' ? '0 0 20px white' : 'none'}"	
-				class="faction-choice" style="background-color: var(--blue);">
-				<h3>Azure Nebula</h3>
-				<h4 style="background: black;">Faction Icon</h4>
-			</div>
-				<div (click)="this.selectedFaction = 'Unaffiliated'"
-					[style]="{'box-shadow': this.selectedFaction == 'Unaffiliated' ? '0 0 20px white' : 'none'}"
-					class="faction-choice" style="background-color: lightgrey;">
-					<h3>Unaffiliated</h3>
-					<h4 style="background: black;">Faction Icon</h4>
-				</div>
 		</div>
-		<div *ngIf="this.selectedFaction == 'Vega'" class="description">
+		<div *ngIf="this.factionIndex > -1" class="description">
 			<div class="details">
-				<h4>Green faction:</h4>
-				<p>-Has this</p>
-				<p>-has that</p>
-				<p>-stuff (long text stuff and stuff and more stuff and text and stuff
-					and text and stuff and then more and then stuff and then more and text)</p>
-				<p>-more (long text stuff and stuff and more stuff)</p>
-				<p>-even more stuff</p>
+				<h4>Description of {{this.gameFactions[this.factionIndex].name}}</h4>
+				<p>{{this.gameFactions[this.factionIndex].description}}</p>
+				<p>Some modifier: {{this.gameFactions[this.factionIndex].someModifier}}</p>
 			</div>
-			<div class="example-pic">Example of a Vega faction colony</div>
+			<div class="example-pic">Example of a {{this.gameFactions[this.factionIndex].name}} colony</div>
 		</div>
-		<div *ngIf="this.selectedFaction == 'Solar'" class="description">
-			<div class="details">
-				<h4>Red faction:</h4>
-				<p>-Has this</p>
-				<p>-has that and then more and then stuff and then more and tex</p>
-				<p>-stuff (long text stuff and stuff and more stuff and text and stuff
-					and text and stuff and then more and then stuff and then more and text)
-				</p>
-				<p>-more (long text stuff and stuff and more stuff)</p>
-				<p>-even more stuff</p>
-			</div>
-			<div class="example-pic">Example of a Solar empire colony</div>
-		</div>
-		<div *ngIf="this.selectedFaction == 'Azure'" class="description">
-			<div class="details">
-				<h4>Blue faction:</h4>
-				<p>-Has this and stuff and stuff and more stuff</p>
-				<p>-has that</p>
-				<p>-stuff (long text stuff and stuff and more stuff and text and stuff
-					and text and stuff and then more and then stuff and then more and text)
-				</p>
-				<p>-more (long text stuff and stuff and more stuff)</p>
-				<p>-even more stuff</p>
-			</div>
-			<div class="example-pic">Example of a Azure Nebula colony</div>
-		</div>
-			<div *ngIf="this.selectedFaction == 'Unaffiliated'" class="description">
-				<div class="details">
-					<h4>Unaffiliated faction:</h4>
-					<p>-Can be attacked by any faction</p>
-					<p>-Allows playing as Robots or Parasites</p>
-					<p>-Can make deals to acquire some faction specific buildings or research</p>
-				</div>
-				<div class="example-pic">Example of a Unaffiliated faction town</div>
-			</div>
 		<div id="buttons">
-			<button [disabled]="this.selectedFaction == '' "type="button" class="forward-button" (click)="this.page=2"></button>
+			<button [disabled]="this.factionIndex < 0 "type="button" class="forward-button" (click)="this.filterSpecies()"></button>
 		</div>
 	</div>
-	<!--Species
-			selection-->
+
+	<!--Species selection-->
 	<div *ngIf="this.page==2" class="char-creation-panels">
 		<div class="summary">
-			<h2 style="height: fit-content;">Select your species MOVE LEFT</h2>
+			<h2 style="height: fit-content;">Select your starting species MOVE LEFT</h2>
 			<h3>
-				Choose the species of your character. Each has their own stregths and
-				weaknesses. The order of species below shows how much would they another species
-				if they were in the same colony. For example, Aquatics will hate Liths but 
-				tolerate Humans. Parasites and Robots are hated equally by all.
+				Choose your starting species. Each has their own stregths and
+				weaknesses. You can eventually have any species in your colonies, however 
+				most don't like mixing, especially with parasites and robots. Parasites
+				and robots can not reproduce naturally.
 			</h3>
 		</div>
 		<div class="panels">
-			<div (click)="this.selectedSpecies = 'Aquatics'"
-				[style]="{'box-shadow': this.selectedSpecies == 'Aquatics' ? '0 0 20px white' : 'none'}"
-				class="faction-choice" style="background-color: purple;">
-				<h3>Aquatics</h3>
-				<h4 style="background: black;">Species Icon</h4>
-			</div>
-			<div (click)="this.selectedSpecies = 'Humans'"
-				[style]="{'box-shadow': this.selectedSpecies == 'Humans' ? '0 0 20px white' : 'none'}"
-				class="faction-choice" style="background-color: bisque">
-				<h3>Humans</h3>
-				<h4 style="background: black;">Species Icon</h4>
-			</div>
-			<div (click)="this.selectedSpecies = 'Insects'"
-				[style]="{'box-shadow': this.selectedSpecies == 'Insects' ? '0 0 20px white' : 'none'}"
-				class="faction-choice" style="background-color: greenyellow">
-				<h3>Insects</h3>
-				<h4 style="background: black;">Species Icon</h4>
-			</div>
-			<div (click)="this.selectedSpecies = 'Liths'"
-				[style]="{'box-shadow': this.selectedSpecies == 'Liths' ? '0 0 20px white' : 'none'}"
-				class="faction-choice" style="background-color: brown">
-				<h3>Liths</h3>
-				<h4 style="background: black;">Species Icon</h4>
-			</div>
-			<div *ngIf="this.selectedFaction =='Unaffiliated'" 
-			 	(click)="this.selectedSpecies = 'Robots'"
-				[style]="{'box-shadow': this.selectedSpecies == 'Robots' ? '0 0 20px white' : 'none'}"
-				class="faction-choice" style="background-color: silver;">
-				<h3>Robots</h3>
-				<h4 style="background: black;">Species Icon</h4>
-			</div>
-			<div *ngIf="this.selectedFaction =='Unaffiliated'"
-				(click)="this.selectedSpecies = 'Parasites'"
-				[style]="{'box-shadow': this.selectedSpecies == 'Parasites' ? '0 0 20px white' : 'none'}"
-				class="faction-choice" style="background-color: rgb(0, 0, 0)">
-				<h3>Parasites</h3>
-				<h4 style="background: black;">Species Icon</h4>
-			</div>
+			<div *ngFor="let species of filteredSpecies; let i = index" class="faction-choice" disabled
+				(click)="this.speciesIndex = i" [style]="{'background-color': species.color,
+								'box-shadow': this.speciesIndex == i ? '0 0 20px white' : 'none'}">
+				<h3>{{species.name}}</h3>
+			</div>			
 		</div>
+		<div *ngIf="this.speciesIndex > -1" class="description">
+			<div class="details">
+				
+				<p style="text-align: center;">{{this.filteredSpecies[this.speciesIndex].name}}</p>
+				<p>Description: {{this.filteredSpecies[this.speciesIndex].description}}</p>
+				<p>Reproduction Speed: {{this.filteredSpecies[this.speciesIndex].reproductionSpeed}}x</p>
+				<p>Research Speed: {{this.filteredSpecies[this.speciesIndex].researchSpeed}}x</p>
+				<p>Production Speed: {{this.filteredSpecies[this.speciesIndex].productionSpeed}}x</p>
+				<p>Combat Strength: {{this.filteredSpecies[this.speciesIndex].combatStrength}}x</p>
+				<p>Suit Complexity: {{this.filteredSpecies[this.speciesIndex].suitComplexity}}x</p>
+				<p>Temperature Range: {{this.filteredSpecies[this.speciesIndex].temperatureRange}}C</p>
+				<p>Temperature Average: {{this.filteredSpecies[this.speciesIndex].temperatureAverage}}C</p>
+				<p>Loyalty: {{this.filteredSpecies[this.speciesIndex].loyalty}}</p>
+			</div>
+			<div class="example-pic">Picture of
+				{{this.filteredSpecies[this.speciesIndex].name}} species
+			</div>
 
-		<div *ngIf="this.selectedSpecies == 'Aquatics'" class="description">
-			<div class="details-species">
-				<h4>The aquatic species: Uncontested intelligence but lacking physical capabilities</h4>
-				<p>Comfortable temperature range and terrain: -5C - 15C / Water</p>
-				<p style="color: green">2.5x research speed </p>
-				<p style="color: green">1.5x reproduction speed</p>
-				<p style="color: green">1.15x manufacturing/fabrication speed</p>
-				<p style="color: red">0.5x combat stregth</p>
-				<p style="color: red">2x suit complexity</p>
-			</div>
 		</div>
-		<div *ngIf="this.selectedSpecies == 'Humans'" class="description">
-			<div class="details-species">
-				<h4>The human species: Can learn to do anything but lacks the will to do it</h4>
-				<p>Comfortable temperature range and terrain: 10C - 40C / Land</p>
-				<p style="color: green">No bonuses or penalties</p>
-				<p style="color: red">- #some number loyalty</p>
-			</div>
-		</div>
-		<div *ngIf="this.selectedSpecies == 'Insects'" class="description">
-			<div class="details-species">
-				<h4>The insect species: Numerous, loyal, with many useful arms</h4>
-				<p>Comfortable temperature range and terrain: 35C - 85C / Land</p>
-				<p style="color: green">3x reproduction speed</p>
-				<p style="color: green">1.5x manufacturing/fabrication speed</p>
-				<p style="color: green">+ #some number loyalty </p>
-				<p style="color: red">0.5x research speed</p>
-				<p style="color: red">0.8x combat stregth</p>
-				<p style="color: red">1.5x suit complexity</p>
-			</div>
-		</div>
-		<div *ngIf="this.selectedSpecies == 'Liths'" class="description">
-			<div class="details-species">
-				<h4>The lith species: About what you would expect from sentient rocks</h4>
-				<p>Comfortable temperature range and terrain: 90C - 150C / Any</p>
-				<p style="color: green">2x combat stregth</p>
-				<p style="color: green">Can handle outer space conditions unprotected</p>
-				<p style="color: red">0.5x suit complexity</p>
-				<p style="color: red">0.5x reproduction speed</p>
-				<p style="color: red">0.8x manufacturing/fabrication speed</p>
-			</div>
-		</div>
-		<div *ngIf="this.selectedSpecies == 'Robots'" class="description">
-			<div class="details-species">
-				<h4>The Robots: Due previous actions of their kind they are despised by everyone.</h4>
-				<p>Comfortable temperature range and terrain: -100C - 100C / Any</p>
-				<p style="color: green">No penalties, can also construct specialized robots</p>
-				<p style="color: green">Can handle outer space conditions unprotected</p>
-				<p style="color: red">Can't reproduce naturally</p>
-				<p style="color: red">Having other species causes rebellions</p>
-			</div>
-		</div>
-		<div *ngIf="this.selectedSpecies == 'Parasites'" class="description">
-			<div class="details-species">
-				<h4>The parasitic species: Can take over any other species as host, extremely loyal</h4>
-				<p>Comfortable temperature range and terrain: Species dependent</p>
-				<p style="color: green">Host dependant bonuses and penalties</p>
-				<p style="color: green">+ #massive number loyalty</p>
-				<p style="color: red">Can't reproduce naturally, requires acquiring host species</p>
-			</div>
-		</div>		
+			
 		<div id="buttons">
-			<button type="button" class="back-button" (click)="this.page=1"></button>
-			<button [disabled]="this.selectedSpecies==''"type="button" class="forward-button" (click)="this.page=3"></button>
+			<button type="button" class="back-button" (click)="this.page=1;this.speciesIndex=-1"></button>
+			<button [disabled]="this.speciesIndex < 0" type="button" class="forward-button" (click)="this.page=3"></button>
 		</div>
 	</div>
 	<!--Stats
@@ -295,8 +163,8 @@
 			page-->
 	<div *ngIf="this.page==4" class="char-creation-panels" style="width: fit-content;">
 			<h2>Confirm your selection MOVE LEFT</h2>
-			<h3>Selected faction: {{this.selectedFaction}}</h3>
-			<h3>Selected species: {{this.selectedSpecies}}</h3>
+			<h3>Selected faction: {{this.gameFactions[this.factionIndex].name}}</h3>
+			<h3>Selected species: {{this.filteredSpecies[this.speciesIndex].name}}</h3>
 			<h3>Selected stats: 
 				<p>&emsp;Space Warfare: {{this.spaceWarfare}}</p>
 				<p>&emsp;Land Warfare: {{this.landWarfare}}</p>

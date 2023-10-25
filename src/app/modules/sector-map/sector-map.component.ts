@@ -79,16 +79,16 @@ export class SectorMapComponent {
 
   //max value to be determined later depending on final galaxy size
   destinationForm = new FormGroup({
-    destinationX : new FormControl(0, [Validators.max(9), Validators.min(0), Validators.pattern(/[0-9]/)]),
-    destinationY: new FormControl(0, [Validators.max(9), Validators.min(0), Validators.pattern(/[0-9]/)])
+    destinationX : new FormControl(0, [Validators.max(99), Validators.min(0), Validators.pattern(/[0-9]/)]),
+    destinationY: new FormControl(0, [Validators.max(99), Validators.min(0), Validators.pattern(/[0-9]/)])
   })
   get destForm() { return this.destinationForm.controls }
 
   goToLocation() {
     this.zoomAmount = 1;
     //-0.5starSystemSize to center planet, pull by half map size for center screen
-    this.pannerLeft = (-this.destinationForm.value.destinationX! - 0.5)  * this.starSytemSize + this.mapSize!.width / 2
-    this.pannerTop = (-this.destinationForm.value.destinationY! - 0.5) * this.starSytemSize + this.mapSize!.height / 2
+    this.pannerLeft = ((-this.destinationForm.value.destinationX! % 10) - 0.5)  * this.starSytemSize + this.mapSize!.width / 2
+    this.pannerTop = ((-this.destinationForm.value.destinationY! % 10) - 0.5) * this.starSytemSize + this.mapSize!.height / 2
     let panner = document.getElementById("systemsPanner");
     panner!.style.transform = `translate(${this.pannerLeft}px, ${this.pannerTop}px) scale(${this.zoomAmount})`;
   }

@@ -25,11 +25,9 @@
 					<icon-checkmark 
 						[style]="{'visibility': (regForm.email.valid && !emailLoading) ? 'visible' : 'hidden'}">
 					</icon-checkmark>
-				<div *ngIf="!emailExists" [hidden]="regForm.email.valid || regForm.email.pristine"
-					class="alert-error">
-					Please enter a valid email!
+				<div *ngIf="emailExists && !regForm.email.pristine" class="alert-error">
+					E-mail is invalid or taken
 				</div>
-				<div *ngIf="emailExists" class="alert-error">E-mail is taken</div>
 				<input 
 					[style]="{'background-color': (regForm.password.valid || regForm.password.pristine) ? 'white' : 'rgb(247, 210, 210)'}"
 					id="regPassword" name="password" type="password" placeholder="Password"

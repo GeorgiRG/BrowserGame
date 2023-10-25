@@ -8,10 +8,9 @@ import { HttpClient } from '@angular/common/http';
 import { of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { UserService } from 'src/app/core/services/user.service';
-import { UserSkills } from 'src/app/shared/interfaces/user-skills.interface';
-import { User } from 'src/app/shared/interfaces/user.interface';
-import { Factions } from 'src/app/shared/enums/factions.enum';
-
+import { LevelUpSkills } from 'src/app/shared/interfaces/levelUpSkills.interface';
+import { Species } from 'src/app/shared/interfaces/species.interface';
+import { Faction } from 'src/app/shared/interfaces/faction.interface';
 @Component({
   selector: 'app-login',
   templateUrl: './char-creation.component.html',
@@ -25,10 +24,11 @@ export class CharCreationComponent {
      
   }
   page: number = 1
-  factions: Array<string>  = Object.values(Factions);
-  selectedFaction: string = '';
-  species : Array<string> = ["Aquatics", "Humans", "Insects", "Liths", "Robots", "Parasites"];
-  selectedSpecies: string = '';
+  gameFactions: Array<Faction> = [];
+  factionIndex: number = -1;
+  gameSpecies : Array<Species> = [];
+  filteredSpecies: Array<Species> = [];
+  speciesIndex: number = -1;
   availablePower: number = 10; 
   //not putting these in array so there is more clarity
   //a lot more typing but safer?
@@ -37,21 +37,59 @@ export class CharCreationComponent {
   research: number = 5;
   engineering: number = 5;
   economy: number = 5;
+  //initial skill levels start at 5
 
   canSubmit: boolean = false;
+
+  ngOnInit(){
+    this.http.get("https://localhost:7017/factions", {observe: 'response'}).pipe(
+      catchError(() => { 
+        return of(false)
+      })
+    ).subscribe((data:any) => {
+      if(data != false && data.body != null) {
+        this.gameFactions = data.body
+      }
+    })
+    this.http.get("https://localhost:7017/species", { observe: 'response' }).pipe(
+      catchError(() => {
+        return of(false)
+      })
+    ).subscribe((data: any) => {
+      if (data != false && data.body != null) {
+        this.gameSpecies = data.body
+      }
+    })
+  }
   //Move to tools
   checkInput() {
     this.page = 4;
-    if (!this.factions.includes(this.selectedFaction) 
-      || !this.species.includes(this.selectedSpecies)
-      || this.availablePower != 0
-      || (this.selectedFaction != "Unaffiliated" && (this.selectedSpecies == "Robots" || this.selectedSpecies == "Parasites"))
-      //all stats + available points
-      || this.spaceWarfare + this.landWarfare + this.research + this.engineering + this.economy != 35) 
+    if ( this.availablePower != 0
+        //all stats + available points
+        || this.spaceWarfare + this.landWarfare + this.research + this.engineering + this.economy != 35) 
       { 
         this.canSubmit = false;
     }
     else { this.canSubmit = true; }
+  }
+
+  filterSpecies(){
+    this.page = 2;
+    if(this.gameFactions[this.factionIndex].name == "Natural Order"){
+      this.filteredSpecies = this.gameSpecies.filter(
+        (species) => species.name == "Robots");
+    }
+    else if (this.gameFactions[this.factionIndex].name == "Swarm") {
+      this.filteredSpecies = this.gameSpecies.filter(
+        (species) => species.name == "Parasites");
+    }
+    else if (this.gameFactions[this.factionIndex].name == "Pandemonium") {
+      this.filteredSpecies = this.gameSpecies;
+    }
+    else {
+      this.filteredSpecies = this.gameSpecies.filter(
+        (species) => species.name != "Parasites" && species.name != "Robots");
+    }
   }
 
   adjust(stat: number, amount: number) {
@@ -77,44 +115,36 @@ export class CharCreationComponent {
   }
 
   updateCharacter() {
-    this.http.put(`https://localhost:7017/users?faction=${this.selectedFaction}&species=${this.selectedSpecies}`,{}, { observe: 'response' }).pipe(
-      catchError((error) => {
-        console.log(error.message);
+    this.http.put(`https://localhost:7017/users?faction=${this.gameFactions[this.factionIndex].name}&species=${this.filteredSpecies[this.speciesIndex].name}`,
+      {}, { observe: 'response' }).pipe(
+      catchError(() => {
         return of(false);
       })
     ).subscribe(
       (data: any) => {
-        if (data && data.status == 200) {
-          //this.router.navigate([''])
-          console.log('HTTP response', data.body);
+        if (data ) {
           this.userSrvc.updateValues(data.body);
-          console.log(this.userSrvc.user)
           this.levelUp();
         }
       })
   }
 
   levelUp(){
-    const skills: UserSkills = {
-      level: 0,
-      experience: 0,
+    const skills: LevelUpSkills = {
       spaceWarfare: this.spaceWarfare,
       landWarfare: this.landWarfare,
       research: this.research,
       engineering: this.engineering,
       economy: this.economy,
-      fame: 0
     };
-    this.http.put(`https://localhost:7017/users/levelUp`, skills, { observe: 'response' }).pipe(
-      catchError((error) => {
-        console.log(error.message);
+    this.http.put(`https://localhost:7017/users/levelUp`, skills).pipe(
+      catchError(() => {
         return of(false);
       })
     ).subscribe(
       (data: any) => {
-        if (data && data.status == 200) {
-          //this.router.navigate([''])
-          console.log('HTTP response', data.body);
+        if (data !== false) {
+          this.router.navigate([''])
         }
       })
   }
