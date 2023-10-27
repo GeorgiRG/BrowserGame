@@ -31,7 +31,7 @@ export class HttpErrorHandlerInterceptor implements HttpInterceptor {
           this.router.navigate(['login']);
         }
         this.msgSrvc.checkError(error)
-        return of()
+        return of(false)
       })
     )
   }

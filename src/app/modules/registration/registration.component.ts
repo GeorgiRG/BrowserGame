@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { Location } from '@angular/common';
-import { Subject, of } from 'rxjs';
+import { of } from 'rxjs';
 import { catchError, debounceTime, tap } from 'rxjs/operators';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { HttpClient, HttpHeaders} from '@angular/common/http';
-import { ModalService } from 'src/app/shared/services/modal.service';
+import { HttpClient } from '@angular/common/http';
+import { ModalService } from 'src/app/modules/UI-modules/modals/modal.service';
 import { Router } from '@angular/router';
 
 @Component({

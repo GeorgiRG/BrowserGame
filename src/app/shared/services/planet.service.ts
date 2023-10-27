@@ -5,7 +5,7 @@ import { PlanetBasicView } from '../interfaces/planetBasicView.interface';
 import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { ModalService } from './modal.service';
+import { ModalService } from '../../modules/UI-modules/modals/modal.service';
 
 @Injectable({ providedIn: 'root' })
 export class PlanetService {

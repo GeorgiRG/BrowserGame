@@ -144,7 +144,7 @@ export class CharCreationComponent {
     ).subscribe(
       (data: any) => {
         if (data !== false) {
-          this.router.navigate([''])
+          this.router.navigate(['map'])
         }
       })
   }

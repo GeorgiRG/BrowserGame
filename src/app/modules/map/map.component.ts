@@ -2,25 +2,23 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Chart } from 'chart.js';
 import { Sector } from 'src/app/shared/interfaces/sector.interface';
-import { MapService } from 'src/app/shared/services/map.service';
+import { MapService } from 'src/app/modules/map/map.service';
 
 @Component({
-  selector: 'app-galaxy-map',
-  templateUrl: './galaxy-map.component.html',
-  styleUrls: ['./galaxy-map.component.scss']
+  selector: 'map',
+  templateUrl: './map.component.html',
+  styleUrls: ['./map.component.scss']
 })
-export class GalaxyMapComponent {
+export class MapComponent {
 
   constructor(
-    public activatedRoute: ActivatedRoute,
-    public mapSrvc: MapService,
+    protected mapSrvc: MapService,
     private router: Router,
   ) {}
 
   sectors: Sector[] | null = null;
 
   ngOnInit() {
-
     this.mapSrvc.getSectors().subscribe(sectors => {
       if (sectors != null) {
         this.sectors = sectors;

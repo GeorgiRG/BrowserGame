@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalService } from 'src/app/shared/services/modal.service';
+import { ModalService } from 'src/app/modules/UI-modules/modals/modal.service';
 
 @Component({
   selector: 'app-message-modal',

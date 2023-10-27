@@ -7,7 +7,7 @@ import { Component} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { StarSystem } from 'src/app/shared/interfaces/star-system.interface';
-import { MapService } from 'src/app/shared/services/map.service';
+import { MapService } from 'src/app/modules/map/map.service';
 
 @Component({
   selector: 'app-login',
@@ -50,7 +50,6 @@ export class SectorMapComponent {
 
   sectorId: number = 0;
   ngOnInit(){
-    this.route.paramMap.subscribe(params => {this.sectorId = Number(params.get('id'))})
     this.updateMapDimensions();
     document.addEventListener("resize", () => { this.updateMapDimensions});
 
@@ -71,7 +70,9 @@ export class SectorMapComponent {
       }
     })
   }
-
+  backToGalaxy(){
+    this.router.navigate(['map']);
+  }
   goToSystem(systemId: number){
     console.log("clicks")
     this.router.navigate([`/sector/${this.sectorId}/star-system/${systemId}`]);

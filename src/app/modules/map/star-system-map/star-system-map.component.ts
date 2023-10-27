@@ -1,16 +1,15 @@
 import { Component } from '@angular/core';
 import { StarSystem } from 'src/app/shared/interfaces/star-system.interface';
-import { MapService } from 'src/app/shared/services/map.service';
+import { MapService } from 'src/app/modules/map/map.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PlanetBasicView } from 'src/app/shared/interfaces/planetBasicView.interface';
 
-
 @Component({
   selector: 'app-star-system',
-  templateUrl: './star-system.component.html',
-  styleUrls: ['./star-system.component.scss']
+  templateUrl: './star-system-map.component.html',
+  styleUrls: ['./star-system-map.component.scss']
 })
-export class StarSystemComponent {
+export class StarSystemMapComponent {
 
   constructor(
     private router: Router,

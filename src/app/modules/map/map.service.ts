@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { StarSystem } from '../interfaces/star-system.interface';
-import { Sector } from '../interfaces/sector.interface';
+import { StarSystem } from '../../shared/interfaces/star-system.interface';
+import { Sector } from '../../shared/interfaces/sector.interface';
+import { MapModule } from './map.module';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: 'any' })
 export class MapService {
 	starSystems: any = null;
 	constructor(
@@ -33,6 +34,7 @@ export class MapService {
 					return of(null);
 				}))
 	}
+	
 	getStarSystem(sectorId: number, starId: number){
 		 return this.http.get<StarSystem>(`https://localhost:7017/map/${sectorId}/star-system/${starId}`,
 		 	{ observe: 'response' }).pipe(

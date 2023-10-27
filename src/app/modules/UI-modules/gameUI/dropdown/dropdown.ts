@@ -9,9 +9,7 @@ import { Component, Input, Output, EventEmitter, AfterViewInit } from '@angular/
 								<path fill="none" stroke="white" stroke-linecap="square" d="m14 5l-6.5 7L1 5"/>
 								</svg>
 							</div>
-															<div [id]="contentId" style="display: none;" class="dropdown-content"></div>
-
-						
+							<div [id]="contentId" style="display: none;" class="dropdown-content"></div>					
 							`,
 	styleUrls: ['./dropdown.scss']
 })

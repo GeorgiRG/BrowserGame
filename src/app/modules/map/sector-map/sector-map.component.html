@@ -2,6 +2,7 @@
 <html>
 	<app-nav-bar></app-nav-bar>
 	<form id="navigation" [formGroup]="destinationForm">
+		<button class="back-button" (click)="backToGalaxy()"></button>
 		<input formControlName="destinationX" type="text" placeholder="X (0-99)">
 		<input formControlName="destinationY"  type="text" placeholder="Y (0-99)">
 		<button id="coordinate-btn" [disabled]="!this.destForm.destinationX.valid || !this.destForm.destinationY.valid" 

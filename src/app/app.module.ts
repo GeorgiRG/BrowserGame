@@ -11,15 +11,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HttpErrorHandlerInterceptor } from './core/interceptors/http-error-handler.interceptor';
 import { GlobalErrorHandler } from './core/services/global-error-handler.service';
-import { MessageModalComponent } from './shared/UIcomponents/modals/message-modal/message-modal.component';
 import { IconsModule } from './shared/icons/icons.module';
 import { CharCreationComponent } from './modules/character-creation/char-creation.component';
-import { NavBarComponent } from './modules/nav-bar/nav-bar.component';
-import { DropdownComponent } from './shared/UIcomponents/general/dropdown/dropdown';
-import { SectorMapComponent } from './modules/sector-map/sector-map.component';
-import { GalaxyMapComponent } from './modules/galaxy-map/galaxy-map.component';
-import { TooltipComponent } from './shared/UIcomponents/general/tooltip/tooltip';
-import { StarSystemComponent } from './modules/star-system/star-system.component';
+import { GameUIModule } from './modules/UI-modules/gameUI/gameUI.module';
 
 @NgModule({
   declarations: [
@@ -27,19 +21,13 @@ import { StarSystemComponent } from './modules/star-system/star-system.component
     RegistrationComponent,
     LoginComponent,
     MainComponent,
-    MessageModalComponent,
     CharCreationComponent,
-    NavBarComponent,
-    DropdownComponent,
-    TooltipComponent,
-    SectorMapComponent,
-    GalaxyMapComponent,
-    StarSystemComponent
   ],
   imports: [
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
+    GameUIModule,
     ReactiveFormsModule,
     CommonModule,
     IconsModule,

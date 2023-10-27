@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { MessageModalComponent } from '../UIcomponents/modals/message-modal/message-modal.component';
+import { MessageModalComponent } from './message-modal.component';
+import { ModalsModule } from './modals.module';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: ModalsModule })
 export class ModalService {
 	private msgBox!: MessageModalComponent
 	constructor(
