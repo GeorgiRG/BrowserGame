@@ -8,11 +8,11 @@ import { UserService } from 'src/app/core/services/user.service';
 import { User } from 'src/app/shared/interfaces/user.interface';
 
 @Component({
-  selector: 'app-main',
-  templateUrl: './main.component.html',
-  styleUrls: ['./main.component.scss']
+  selector: 'planet',
+  templateUrl: './planet.component.html',
+  styleUrls: ['./planet.component.scss']
 })
-export class MainComponent {
+export class PlanetComponent {
   constructor(
     private userSrvc: UserService,
     private http: HttpClient,

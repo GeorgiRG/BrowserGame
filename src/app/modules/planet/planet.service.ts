@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { ProductionValues } from '../interfaces/production-values.interface';
+import { ProductionValues } from '../../shared/interfaces/production-values.interface';
 import { UserService } from 'src/app/core/services/user.service';
-import { PlanetBasicView } from '../interfaces/planetBasicView.interface';
+import { PlanetBasicView } from '../../shared/interfaces/planetBasicView.interface';
 import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { ModalService } from '../../modules/UI-modules/modals/modal.service';
+import { ModalService } from '../UI-modules/modals/modal.service';
 
 @Injectable({ providedIn: 'root' })
 export class PlanetService {

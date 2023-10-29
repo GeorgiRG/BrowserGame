@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RegistrationComponent } from './modules/registration/registration.component';
 import { LoginComponent } from './modules/login/login.component';
-import { MainComponent } from './modules/main/main.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
@@ -20,7 +19,6 @@ import { GameUIModule } from './modules/UI-modules/gameUI/gameUI.module';
     AppComponent,
     RegistrationComponent,
     LoginComponent,
-    MainComponent,
     CharCreationComponent,
   ],
   imports: [
@@ -31,8 +29,7 @@ import { GameUIModule } from './modules/UI-modules/gameUI/gameUI.module';
     ReactiveFormsModule,
     CommonModule,
     IconsModule,
-    FormsModule,
-    NgChartsModule
+    FormsModule
   ],
   providers: [
     {
