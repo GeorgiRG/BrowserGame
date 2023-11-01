@@ -3,19 +3,19 @@
   Shows galaxy map, boundaries removed for now
   to do: add resolver, add other 100regions
 */
-import { Component} from '@angular/core';
+import { Component, OnDestroy, OnInit} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { StarSystem } from 'src/app/shared/interfaces/star-system.interface';
 import { MapService } from 'src/app/modules/map/map.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './sector-map.component.html',
   styleUrls: ['./sector-map.component.scss']
 })
-export class SectorMapComponent {
-  activatedRoute: any;
+export class SectorMapComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     public route: ActivatedRoute,
@@ -48,6 +48,7 @@ export class SectorMapComponent {
     "": 'rgba(0,0,0,0)'
   }
 
+  private destroy$ = new Subject<void>();
   sectorId: number = 0;
   ngOnInit(){
     this.updateMapDimensions();
@@ -57,25 +58,28 @@ export class SectorMapComponent {
     if(panner == null) location.reload();
     panner!.addEventListener("wheel", (event) => {this.zoom(event, 0, this.zoomFactor)})
 
-    this.mapSrvc.getSectorSystems(this.sectorId).subscribe(stars => {
-      if(stars!=null){
-        
-        for (let i = 0; i < stars.length; i++) {
-          let faction = stars[i].faction;
-          this.backgrounds.push(this.colors[faction as keyof typeof this.colors])
-          let starType = Math.floor(Math.random() * 4);
-          this.images.push(`/assets/star${starType}.jpg`);
-        }
-        this.starSystems = stars;
-      }
+    this.route.paramMap.subscribe(params => {
+      this.sectorId = Number(params.get('sectorId'))
     })
+    this.mapSrvc.getSectorSystems(this.sectorId)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(stars => {
+        if(stars!=null){
+          for (let i = 0; i < stars.length; i++) {
+            let faction = stars[i].faction;
+            this.backgrounds.push(this.colors[faction as keyof typeof this.colors])
+            let starType = Math.floor(Math.random() * 4);
+            this.images.push(`/assets/star${starType}.jpg`);
+          }
+          this.starSystems = stars;
+        }
+      })
   }
   backToGalaxy(){
     this.router.navigate(['map']);
   }
   goToSystem(systemId: number){
-    console.log("clicks")
-    this.router.navigate([`/sector/${this.sectorId}/star-system/${systemId}`]);
+    this.router.navigate([`map/sector/${this.sectorId}/star-system/${systemId}`]);
   }
 
   //max value to be determined later depending on final galaxy size
@@ -174,5 +178,10 @@ export class SectorMapComponent {
         window.requestAnimationFrame(() => this.zoom(event, steps + 1, zoomFactor));
       }
     }
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

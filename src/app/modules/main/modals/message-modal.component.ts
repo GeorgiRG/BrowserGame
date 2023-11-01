@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalService } from 'src/app/modules/UI-modules/modals/modal.service';
+import { ModalService } from 'src/app/core/services/modal.service';
 
 @Component({
   selector: 'app-message-modal',
@@ -22,6 +22,7 @@ export class MessageModalComponent implements OnInit{
   show(msg: string){
     let errorMsgDiv = document.getElementById("backgroundDimmer")
     this.msgContent = msg
-    if (errorMsgDiv !== null) { errorMsgDiv.style.display = "block" }  }
+    if (errorMsgDiv !== null) { errorMsgDiv.style.display = "block" }  
+  }
 
 }

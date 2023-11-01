@@ -4,6 +4,7 @@ import { LoginComponent } from './modules/login/login.component';
 import { RegistrationComponent } from './modules/registration/registration.component';
 import { CharCreationComponent } from './modules/character-creation/char-creation.component';
 import { AppComponent } from './app.component';
+import { MapResolver } from './modules/map/map.resolver';
 
 const routes: Routes = [
   {path: 'registration',  component: RegistrationComponent},
@@ -16,7 +17,13 @@ const routes: Routes = [
   {
     path: 'planet',
     loadChildren: () => import('./modules/planet/planet.module').then(m => m.PlanetModule)
+  },
+  {
+    path: '',
+    redirectTo: '',
+    pathMatch: 'full'
   }
+
 ];
 
 @NgModule({

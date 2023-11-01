@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UserService } from './core/services/user.service';
 import { ProductionService } from './shared/services/production.service';
+import { ModalService } from './core/services/modal.service';
 
 @Component({
   selector: 'app-root',
@@ -12,5 +13,8 @@ export class AppComponent {
   constructor(
     protected UserSrvc: UserService,
     protected productionSrvc: ProductionService,
+    protected modalService: ModalService
   ){}
+
+  
 }

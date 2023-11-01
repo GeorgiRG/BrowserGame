@@ -17,6 +17,27 @@ html,body {
 body {
 	font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+.game-content-window{
+	height: fit-content;
+	flex-wrap: wrap;
+	left: 10%;
+	top: 20%;
+	width: 80%;
+	position: absolute;
+	display: flex;
+	background: url("/assets/space2.jpg");
+	flex-direction: row;		
+}
+#map {
+	height: 75%;
+	width: 80%;
+	background-repeat: round;
+	position: absolute;
+	background-color: black;
+	top: 20%;
+	left: 10%;
+	overflow: hidden;
+}
 .icon-inside {
 	box-shadow: none;
 	cursor: pointer;

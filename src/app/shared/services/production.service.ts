@@ -5,7 +5,7 @@ import { PlanetService } from '../../modules/planet/planet.service';
 import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { ModalService } from '../../modules/UI-modules/modals/modal.service';
+import { ModalService } from '../../core/services/modal.service';
 import { Resource } from '../interfaces/resource.interface';
 @Injectable({ providedIn: 'root' })
 export class ProductionService {

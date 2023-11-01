@@ -13,6 +13,7 @@ import { GlobalErrorHandler } from './core/services/global-error-handler.service
 import { IconsModule } from './shared/icons/icons.module';
 import { CharCreationComponent } from './modules/character-creation/char-creation.component';
 import { GameUIModule } from './modules/UI-modules/gameUI/gameUI.module';
+import { MessageModalComponent } from './modules/main/modals/message-modal.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { GameUIModule } from './modules/UI-modules/gameUI/gameUI.module';
     RegistrationComponent,
     LoginComponent,
     CharCreationComponent,
+    MessageModalComponent
   ],
   imports: [
     HttpClientModule,

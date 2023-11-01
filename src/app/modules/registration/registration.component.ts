@@ -5,7 +5,7 @@ import { catchError, debounceTime, tap } from 'rxjs/operators';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { HttpClient } from '@angular/common/http';
-import { ModalService } from 'src/app/modules/UI-modules/modals/modal.service';
+import { ModalService } from 'src/app/core/services/modal.service';
 import { Router } from '@angular/router';
 
 @Component({

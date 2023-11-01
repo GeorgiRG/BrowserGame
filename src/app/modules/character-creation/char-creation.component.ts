@@ -11,6 +11,7 @@ import { UserService } from 'src/app/core/services/user.service';
 import { LevelUpSkills } from 'src/app/shared/interfaces/levelUpSkills.interface';
 import { Species } from 'src/app/shared/interfaces/species.interface';
 import { Faction } from 'src/app/shared/interfaces/faction.interface';
+import { ModalService } from 'src/app/core/services/modal.service';
 @Component({
   selector: 'app-login',
   templateUrl: './char-creation.component.html',
@@ -20,7 +21,8 @@ export class CharCreationComponent {
   constructor(
     private userSrvc: UserService,
     private router: Router,
-    private http: HttpClient) {
+    private http: HttpClient,
+    private modalService: ModalService) {
      
   }
   page: number = 1
@@ -144,6 +146,7 @@ export class CharCreationComponent {
     ).subscribe(
       (data: any) => {
         if (data !== false) {
+          this.modalService.showMsg(`Hello, Commander! Please select a location where your colony will be established!`)
           this.router.navigate(['map'])
         }
       })

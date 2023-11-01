@@ -1,12 +1,10 @@
-#map {
-	height: 75%;
-	width: 80%;
-	background-repeat: round;
-	position: absolute;
-	background-color: black;
-	top: 20%;
-	left: 10%;
-	overflow: hidden;
+
+.game-content-window{
+		min-height: 75%;
+		background: none;
+		background-color: black;
+		overflow: hidden;
+	
 }
 #navigation{
 	background-color: black;

@@ -5,7 +5,7 @@ import { PlanetBasicView } from '../../shared/interfaces/planetBasicView.interfa
 import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { ModalService } from '../UI-modules/modals/modal.service';
+import { ModalService } from '../../core/services/modal.service';
 
 @Injectable({ providedIn: 'root' })
 export class PlanetService {
@@ -16,9 +16,7 @@ export class PlanetService {
 		private http: HttpClient,
 		private msgSrvc: ModalService
 
-	) {
-
-	}
+	) {}
 
 	collectPlanetValues(){
 		this.http.get<PlanetBasicView>(`https://localhost:7017/planet/`).pipe(

@@ -7,8 +7,9 @@ import { StarSystemMapComponent } from './star-system-map/star-system-map.compon
 
 const routes: Routes = [
 	{ path: '', component: MapComponent },
-	{ path: 'sector', component: SectorMapComponent },
-	{ path: 'sector/:sectorId/star-system/:systemId', component: StarSystemMapComponent }
+	{ path: 'sector/:sectorId', component: SectorMapComponent },
+	{ path: 'sector/:sectorId/star-system/:systemId', component: StarSystemMapComponent },
+
 ];
 
 @NgModule({

@@ -25,7 +25,7 @@
 .sector {
 	background: no-repeat center/100% url("/assets/sector3.jpg") ;
 	color: rgb(207, 255, 76);
-	border-radius: 30%;
+	border-radius: 40%;
 	text-align: center;
 	width: 100px;
 	margin: 10px;
@@ -35,7 +35,7 @@
 
 .sector:hover {
 	transform: scale(0.9, 0.9);
-	box-shadow: 1px 1px 5px white;
+	box-shadow: 1px 1px 15px white;
 }
 
 .sector:hover .tooltip {
