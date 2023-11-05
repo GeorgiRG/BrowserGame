@@ -21,6 +21,7 @@ export class ErrorMessageService {
 		if (errorResp == null) {
 			this._msg = "Unexpected error, please refresh and try again!"
 		}
+		console.log(errorResp.status)
 		if (errorResp.status >= 400 && errorResp.status < 500) {
 			if(errorResp.status === 404) { this._msg = "Nothing was found/Wrong link!"} 
 			else if (errorResp.status === 401) { this._msg = "Session expired!" }

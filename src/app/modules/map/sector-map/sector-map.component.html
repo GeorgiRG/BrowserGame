@@ -10,11 +10,15 @@
 		</button>
 		<h3 style="margin-left: 30px ;">Sector {{sectorId}}</h3>
 	</form>
-	<div id="map" class="game-content-window" >
+	<app-error *ngIf="this.error"></app-error>
+	<app-loading *ngIf="this.loading"></app-loading>
+	<div *ngIf="!this.error && !this.loading" id="map" class="game-content-window" >
 		<button class="map-btn" id="map-btn-left"></button>
 		<button class="map-btn" id="map-btn-top"></button>
 		<button class="map-btn" id="map-btn-right"></button>
 		<button class="map-btn" id="map-btn-bottom"></button>
+		<h1 *ngIf="this.loading" style="color: red;">Loading</h1>
+
 		<div class="star-systems" id="systemsPanner" 
 			(pointerleave)="this.panning = false" (pointermove)="this.moveView($event)"
 			(pointerup)="this.panning=false" (pointerdown)="this.updatePannerMousePos($event)">

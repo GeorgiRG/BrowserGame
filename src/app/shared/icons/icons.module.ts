@@ -14,7 +14,6 @@ import { IconCloseComponent } from './basic/icon-close.component';
     IconLoadingComponent,
     IconPlusComponent,
     IconCloseComponent
-
   ],
   imports: [
     CommonModule
@@ -25,7 +24,6 @@ import { IconCloseComponent } from './basic/icon-close.component';
     IconLoadingComponent,
     IconPlusComponent,
     IconCloseComponent
-
   ]
 })
 export class IconsModule { }

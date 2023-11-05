@@ -22,23 +22,27 @@ export class StarSystemMapComponent implements OnInit, OnDestroy{
   planets: Array<PlanetBasicView> | null = null;
   sectorId: number = 0
   systemId: number = 0;
+  error : boolean = false;
+  loading: boolean = true;
   private destroy$ = new Subject<void>();
   ngOnInit() {
-    this.route.paramMap.subscribe(params => { 
-      this.systemId = Number(params.get('systemId'))
-      this.sectorId = Number(params.get('sectorId'))
-    })
-    this.mapSrvc.getStarSystem(this.sectorId, this.systemId)
+    this.route.data
       .pipe(takeUntil(this.destroy$))
-      .subscribe(star => {
-        if (star != null) {
-          this.starSystem = star;
-          this.planets = star.planets
+      .subscribe(data => {
+        if (data['starSystem'] == null) {
+          this.error = true;
         }
-      })
+        else {
+          this.starSystem = data['starSystem']
+          this.planets = this.starSystem!.planets;
+        }
+        this.loading = false
+
+      });
   } 
 
   backToSector(){
+    this.loading = true;
     this.router.navigate([`map/sector/${this.sectorId}`]);
   }
   

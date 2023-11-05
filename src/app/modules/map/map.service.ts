@@ -4,7 +4,6 @@ import { catchError, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { StarSystem } from '../../shared/interfaces/star-system.interface';
 import { Sector } from '../../shared/interfaces/sector.interface';
-import { MapModule } from './map.module';
 
 @Injectable({ providedIn: 'any' })
 export class MapService {

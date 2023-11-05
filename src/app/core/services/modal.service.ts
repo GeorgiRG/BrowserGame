@@ -8,11 +8,11 @@ export class ModalService {
 	){}
 	
 	addMsgModal(modal: MessageModalComponent){
-		this.msgBox = modal
+		this.msgBox = modal;
 	}
+	
 	showMsg(msg: string) {		
-
-		this.msgBox.show(msg)
+		this.msgBox.show(msg);
 	}
 
 }

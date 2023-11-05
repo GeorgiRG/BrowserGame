@@ -7,7 +7,9 @@
 	</h3>
 
 </div>
-<div class="game-content-window">
+<app-error *ngIf="this.error"></app-error>
+<app-loading *ngIf="this.loading"></app-loading>
+<div *ngIf="!this.error && !this.loading" class="game-content-window">
 	<div *ngFor="let sector of sectors; let i = index " class="sector" (click)="redirect(i + 1)">
 		<tooltip [sector]="sector" [position]=i></tooltip>
 		<!--<div class="details"> Star Name: ASDF <br> Planets: 3/5 <br> Resources: 300</div>-->

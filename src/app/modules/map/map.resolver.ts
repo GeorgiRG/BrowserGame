@@ -1,5 +1,5 @@
 import { inject } from '@angular/core';
-import { ResolveFn } from '@angular/router';
+import { ResolveFn, Router } from '@angular/router';
 import { MapService } from './map.service';
 import { Sector } from 'src/app/shared/interfaces/sector.interface';
 

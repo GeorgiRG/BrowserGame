@@ -3,7 +3,7 @@
   Shows galaxy map, boundaries removed for now
   to do: add resolver, add other 100regions
 */
-import { Component, OnDestroy, OnInit} from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { StarSystem } from 'src/app/shared/interfaces/star-system.interface';
@@ -15,7 +15,7 @@ import { Subject, takeUntil } from 'rxjs';
   templateUrl: './sector-map.component.html',
   styleUrls: ['./sector-map.component.scss']
 })
-export class SectorMapComponent implements OnInit, OnDestroy {
+export class SectorMapComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private router: Router,
     public route: ActivatedRoute,
@@ -50,35 +50,49 @@ export class SectorMapComponent implements OnInit, OnDestroy {
 
   private destroy$ = new Subject<void>();
   sectorId: number = 0;
+  error: boolean = false;
+  loading: boolean = true;
   ngOnInit(){
-    this.updateMapDimensions();
-    document.addEventListener("resize", () => { this.updateMapDimensions});
-
-    let panner = document.getElementById("systemsPanner")
-    if(panner == null) location.reload();
-    panner!.addEventListener("wheel", (event) => {this.zoom(event, 0, this.zoomFactor)})
 
     this.route.paramMap.subscribe(params => {
       this.sectorId = Number(params.get('sectorId'))
     })
-    this.mapSrvc.getSectorSystems(this.sectorId)
+    this.route.data
       .pipe(takeUntil(this.destroy$))
-      .subscribe(stars => {
-        if(stars!=null){
-          for (let i = 0; i < stars.length; i++) {
-            let faction = stars[i].faction;
+      .subscribe(data => {
+        if (data['sector'] == null) {
+          this.error = true;
+        }
+        else {
+          this.starSystems = data['sector']
+        }
+        this.loading = false
+        if (this.starSystems != null) {
+          for (let i = 0; i < this.starSystems.length; i++) {
+            let faction = this.starSystems[i].faction;
             this.backgrounds.push(this.colors[faction as keyof typeof this.colors])
             let starType = Math.floor(Math.random() * 4);
             this.images.push(`/assets/star${starType}.jpg`);
           }
-          this.starSystems = stars;
-        }
-      })
+        }    
+    });
   }
-  backToGalaxy(){
-    this.router.navigate(['map']);
+  ngAfterViewInit(): void {
+    this.updateMapDimensions();
+    document.addEventListener("resize", () => { this.updateMapDimensions });
+
+    let panner = document.getElementById("systemsPanner")
+    if (panner == null) this.error = true;
+    panner!.addEventListener("wheel", (event) => { this.zoom(event, 0, this.zoomFactor) })
   }
+
+  backToGalaxy(){ 
+    this.loading = true;
+    this.router.navigate(['map']); 
+  }
+
   goToSystem(systemId: number){
+    this.loading = true;
     this.router.navigate([`map/sector/${this.sectorId}/star-system/${systemId}`]);
   }
 
@@ -104,7 +118,6 @@ export class SectorMapComponent implements OnInit, OnDestroy {
       throw new Error("Map dimensions were not updated");
     }
   }
-
   
   updatePannerMousePos(event: MouseEvent){
     this.pannerMousePos.X = event.pageX;

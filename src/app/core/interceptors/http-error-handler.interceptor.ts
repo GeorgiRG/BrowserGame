@@ -30,8 +30,8 @@ export class HttpErrorHandlerInterceptor implements HttpInterceptor {
         if (error.status === 401) {
           this.router.navigate(['login']);
         }
-        this.msgSrvc.checkError(error)
-        return of(false)
+        //this.msgSrvc.checkError(error)
+        return throwError(() => of())
       })
     )
   }
@@ -39,9 +39,6 @@ export class HttpErrorHandlerInterceptor implements HttpInterceptor {
     if (error.status === 404 || error.status >= 500) {
       return timer(delayCount * 1000)
     }
-    else {
-      console.log("400 thrown\n", error.error)
-      return throwError(() => error);
-    }
+    return throwError(() => of());
   }
 }

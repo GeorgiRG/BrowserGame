@@ -97,6 +97,7 @@ export class RegistrationComponent {
   goToCharacterCreation() {
     this.router.navigate(['character-creation']);
   }
+  
   registerLoading: boolean = false;
   registered: boolean = false;
   registration() {

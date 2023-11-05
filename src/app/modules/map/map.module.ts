@@ -14,7 +14,7 @@ import { MapService } from './map.service';
 		MapRoutingModule,
 		FormsModule,
 		ReactiveFormsModule,
-		GameUIModule
+		GameUIModule,
 	],
 	declarations: [
 		SectorMapComponent,
